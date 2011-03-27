@@ -1,0 +1,22 @@
+amiguetes\PtuitBundle\Entity\Favorito:
+  type: entity
+  table: Favorito
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    usuarioid:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: usuarioId
+    mensajeid:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: mensajeId
+  lifecycleCallbacks: {  }

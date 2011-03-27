@@ -1,0 +1,35 @@
+amiguetes\PtuitBundle\Entity\Mensaje:
+  type: entity
+  table: Mensaje
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    nombreusuario:
+      type: string
+      length: 50
+      fixed: false
+      nullable: false
+      column: nombreUsuario
+    fecha:
+      type: datetime
+      nullable: false
+    texto:
+      type: string
+      length: 160
+      fixed: false
+      nullable: false
+    interno:
+      type: integer
+      unsigned: false
+      nullable: true
+    replicado:
+      type: string
+      length: 45
+      fixed: false
+      nullable: true
+  lifecycleCallbacks: {  }

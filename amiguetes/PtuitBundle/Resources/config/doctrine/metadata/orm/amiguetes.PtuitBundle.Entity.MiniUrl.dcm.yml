@@ -1,0 +1,32 @@
+amiguetes\PtuitBundle\Entity\MiniUrl:
+  type: entity
+  table: Mini_Url
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    url:
+      type: string
+      length: 200
+      fixed: false
+      nullable: false
+    mini:
+      type: string
+      length: 9
+      fixed: false
+      nullable: true
+    usuarioid:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: usuarioId
+    expira:
+      type: string
+      length: 45
+      fixed: false
+      nullable: true
+  lifecycleCallbacks: {  }

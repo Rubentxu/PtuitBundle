@@ -1,0 +1,22 @@
+amiguetes\PtuitBundle\Entity\MensajeTag:
+  type: entity
+  table: Mensaje_Tag
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    mensajeid:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: mensajeId
+    tagid:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: tagId
+  lifecycleCallbacks: {  }

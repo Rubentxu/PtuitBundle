@@ -1,0 +1,22 @@
+amiguetes\PtuitBundle\Entity\Seguidor:
+  type: entity
+  table: Seguidor
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    usuarioid:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: usuarioId
+    seguidorid:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: seguidorId
+  lifecycleCallbacks: {  }
