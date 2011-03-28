@@ -15,14 +15,16 @@ class CajaMensajeForm {
     public function validar($request) {
 
         $mensaje = $request->post('txtMen');
-        $mensaje = trim($mensaje);
-        $mensaje = filter_var($mensaje, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_ENCODE_AMP);
+
+        
 
         if (strlen($mensaje) > 160 || strlen($mensaje) < 1 || $mensaje==NULL || $mensaje=='') {
+
             $msgError = "El mensaje debe contener al menos un caracter y no exceder de 160 caracteres.";
             return array("pagina" => "json",
                 "datos" => array('msgError' => $msgError, "validado" => 'FALSE'));
-        } 
+        }
+        
         return array("datos" => array('msgError' => FALSE, "validado" => 'TRUE'));
     }
 

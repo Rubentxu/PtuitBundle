@@ -96,6 +96,8 @@ class serviceMySql implements IService {
 
     public function crearMensaje($mensaje, $idCategoria, $idUsuario) {
         try {
+            $mensaje = trim($mensaje);
+            $mensaje = filter_var($mensaje, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_FLAG_ENCODE_AMP);
             $db = $this->pdo();
             $sql = $db->prepare('INSERT INTO `SMS` (`texto`,`category`,`user`)
             VALUES (:texto, :categoria, :usuario);');

@@ -5,22 +5,16 @@ html {
     padding: 0;
     background-color: #051d2a;
     font-family: "Arial", "Helvetica", sans-serif;
-
 }
 
 body {
     margin: 0 auto;
-    *text-align: center;
-}
-#page{
-    margin: 0 auto;
     width: 1024px;
     height: 750px;
     background-color: #FF8C00;
-    *text-align: left;
 }
 
-a.link {
+a {
     position: relative;
     top: 10px;
     right: 5px;
@@ -62,7 +56,7 @@ a.link {
     top: 7px;
 }
 
-#marco {
+ #marco {
     position: relative;
     z-index: 3;
     width: 500px;
@@ -70,7 +64,7 @@ a.link {
     background-color:transparent;
     margin-left: 262px;
     margin-top: -140px;
-
+    
 }
 #marcoIzq{
     position: absolute;
@@ -79,13 +73,13 @@ a.link {
     margin-top: 7px;
     z-index: 5;
     color: #E0DFDE;
-
-
+    
+    
 
 }
 
 #footer {
-
+    
     height: 224px;
     position: relative;
     margin: 0 auto;
@@ -102,14 +96,14 @@ a.link {
 }
 #cajaMensaje{
     width: 500px;
-    padding-top:  4em;
-    *padding-top: 4.5em;
+    padding-top:  4.3em;
     font-family: sans-serif;
 
 }
 #cajaMensaje form{
     background-color: #DB7112;
-    
+    border-left: 1px solid #DB5C12;
+    border-right:1px solid #DB5C12;
 }
 
 
@@ -130,18 +124,11 @@ a.link {
     height: 405px;
     margin-top: .2em;
     padding-top:  1em;
-    *margin-top: 0em;
-    *padding-top:0em;
     overflow: auto;
     overflow-x:hidden;
     background-color: #DB7112;
     border-left: 1px solid #DB5C12;
     border-right:1px solid #DB5C12;
-}
-textarea{
-    width: 39em;
-    *width: 35em;
-   
 }
 
 .contador{
@@ -156,9 +143,23 @@ textarea{
     font-family: tahoma;
     font-size: 9pt;
     display: block;
+
+
+
+
 }
+.avatar{
+    padding: 1em .5em 1em 0;
+    float: left;
+    width: 43px;
+    height: 27px;
 
 
+}
+.avatarTxt{
+    padding: 0.7em;
+    overflow: hidden;
+}
 
 .label{
     float: left;
@@ -175,8 +176,8 @@ textarea{
 
 
 #panel{
-    background-color: #DB7112;
-    width: 350px;
+    background-color: #DB7112;   
+    width: 250px;
     height: 310px;
     padding: .5em;
     border: #0D4059 solid 5px;
@@ -188,8 +189,8 @@ textarea{
 
 }
 #panel2{
-    background-color: #DB7112;
-    width: 350px;
+    background-color: #DB7112;    
+    width: 250px;
     height: 340px;
     padding: .5em;
     border: #0D4059 solid 5px;
@@ -215,7 +216,7 @@ textarea{
     padding: 0 1em;
 }
 #btnLogin{
-    clear: both;
+    clear: both;    
     margin-top: 3em;
     float: left;
 }
@@ -225,86 +226,30 @@ textarea{
     float: left;
 }
 ul.marquee {
-    /* required styles */
-    display: block;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    line-height: 1;
-    position: relative;
-    overflow: hidden;
-    width: 430px;
-    height: 25px;
-    border: 1px solid #E0DFDE;
-    background-color: #3C3B53;
-    color: white;
+	/* required styles */
+	display: block;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	line-height: 1;
+	position: relative;
+	overflow: hidden;	
+	width: 430px;
+	height: 25px; 	
+	border: 1px solid #E0DFDE;
+        background-color: #3C3B53;
+        color: white;
 }
 
 ul.marquee li {
-    /* required styles */
-    position: absolute;
-    top: -999em;
-    left: 0;
-    display: block;
-    white-space: nowrap; /* keep all text on a single line */
+	/* required styles */
+	position: absolute;
+	top: -999em;
+	left: 0;
+	display: block;
+	white-space: nowrap; /* keep all text on a single line */
 
-    /* optional styles for appearance */
-    font: 14px Arial, Helvetica, sans-serif;
-    padding: 3px 5px;
-}
-ul.statuses{
-	margin:5px 0;
-}
-
-ul.statuses li {
-	position:relative;
-	border-bottom:1px solid #DB5C12;
-	padding:10px 10px 10px 5px;
-	list-style:none;
-	font-size:14px;
-}
-
-ul.statuses li:first-child{
-	border-top:1px dashed #D2DADA;
-}
-
-ul.statuses li:hover {
-	background-color:#cf5C12;
-}
-
-h3.timeline{
-	margin-top:20px;
-	color:#999999;
-	font-size:20px;
-	font-weight:normal;
-}
-
-div.tweetTxt{
-	float:left;
-	
-	overflow:hidden;
-}
-
-img.avatar{
-	float:left;
-	margin-right:10px;
-	border:0px solid #0B3850;
-}
-div.date{
-	line-height:18px;
-	font-size:12px;
-	color:#999999;
-}
-
-li a, li a:visited {
-	color:#0B3850;
-	text-decoration:none;
-	outline:none;
-}
-
-li a:hover{
-	text-decoration:underline;
-}
-.clear{
-	clear:both;
+	/* optional styles for appearance */
+	font: 14px Arial, Helvetica, sans-serif;
+	padding: 3px 5px;
 }

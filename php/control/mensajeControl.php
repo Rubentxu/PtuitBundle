@@ -57,6 +57,9 @@ class mensajeControl {
             $datosS = $this->sesiones->cogerDatosUsuario();
             $usuario = $datosS['usuario'];
             $idUsuario = $datosS['idUsuario'];
+        }  else {
+            $usuario='anonimo';
+            $idUsuario=2;
         }
         $mensaje = $this->request->post('txtMen');              
         $idCategoria = 1;

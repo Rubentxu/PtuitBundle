@@ -7,7 +7,9 @@ $(document).ready(function(){
     $('#panel2').hide();
     $("#login").click(toggleLogin);
     $("#registro").click(toggleRegistro);
-    $("#mar").marquee({yScroll: "bottom"});
+    $("#mar").marquee({
+        yScroll: "bottom"
+    });
 
 
 })
@@ -144,6 +146,7 @@ jQuery.fn.cuentaCaracteres= function(){
     var contador =$('.contador');
     txt.keyup(function(){
         errorMensaje.text('');
+        errorMensaje.hide();
         contador.text(': '+txt.attr("value").length+' :');
 
     });
@@ -183,12 +186,23 @@ function llegadaDatos (datos){
     if(datos.validado=='FALSE'){
         var errorMensaje =$('#errorMensaje');
         errorMensaje.text(datos.msgError);
+        errorMensaje.show('slow');
         
     }else {
-        var avatar=$('<div class="ptuits"><img class="avatar" label="ptuit" src="/web/imagen/ptuit.png"></img></div>');
-        avatar.appendTo($('#caja_men'));
-        var nuevoMens=$('<span class="avatarTxt"><em style="color:blue;">'+datos.datosMensajes.usuario+' :</em> '+datos.datosMensajes.texto+'</span><span style="color:#FFF;float: right;">'+datos.datosMensajes.fmod+'</span></div>');
-        nuevoMens.appendTo($(avatar));
+       var msg= '<li><a href="#"><img class="avatar" src="/web/imagen/ptuit.png"  alt="avatar" /></a>'+
+	'<div class="tweetTxt"><strong><a href="#"> ' +datos.datosMensajes.usuario+ ' </a></strong>'+
+                    datos.datosMensajes.texto+'<div class="date">'+datos.datosMensajes.fmod+ '</div>'+
+	'</div>	<div class="clear"></div></li>';
+        
+        //        caj.html('<div class="ptuits"><img class="avatar" label="ptuit" src="/web/imagen/ptuit.png"></img><span class="avatarTxt"><em style="color:blue;">'
+        //            +datos.datosMensajes.usuario+' :</em> '+datos.datosMensajes.texto+
+        //            '</span><span style="color:#FFF;float: right;">'+datos.datosMensajes.fmod+'</span></div></div>');
+        //        avatar.text($('#caja_men'));
+        $('ul.statuses li:first-child').before(msg);
+        $("ul.statuses:empty").append(msg);
+        $('#lastTweet').html($('#inputField').val());
+        $('#inputField').val('');
+        
     }
     $(".txtMen").removeClass("txtMenCargando");
 }
@@ -361,7 +375,7 @@ function completado(exito){
                     // scroll the message to the left
                     $li.animate({
                         left: endPos + "px"
-                        }, ((width + curPos) * options.scrollSpeed), options.fxEasingScroll, function (){
+                    }, ((width + curPos) * options.scrollSpeed), options.fxEasingScroll, function (){
                         finish($li);
                     });
                 }, delay);
@@ -373,7 +387,7 @@ function completado(exito){
                     // scroll the message down
                     $li.animate({
                         top: (options.yScroll == "top" ? "+" : "-") + $marquee.innerHeight() + "px"
-                        }, options.showSpeed, options.fxEasingScroll);
+                    }, options.showSpeed, options.fxEasingScroll);
                     // finish showing this message
                     finish($li);
                 }, delay);
