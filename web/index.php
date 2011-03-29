@@ -39,7 +39,7 @@
                     <p><em>Escribe tu nick y password</em></p>
                     <label class="label" for="nick">Nombre/Nick:</label> <input id="nick" class="campo" title="nick" type="text"></input>
                     <label class="label" for="pass">Password:</label> <input id="pass"class="campo" title="pass" type="password"></input>
-                    <label class="label" for="cat">Catcha:</label> <input id="cat"class="campo" title="cat" type="text"></input>
+                    <label class="label" for="cat">Catcha:</label> <input id="cat"class="campo"disabled="disabled" title="cat" type="text" value="Pendiente Implementacion..."></input>
 
 
                     <p><input id="btnLogin" title="btnlogin" name="login" value="login" type="button"/></p>

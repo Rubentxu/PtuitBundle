@@ -257,9 +257,10 @@ ul.statuses{
 }
 
 ul.statuses li {
-	position:relative;
+	
 	border-bottom:1px solid #DB5C12;
-	padding:10px 10px 10px 5px;
+	padding:10px 0px ;
+        *padding:10px 10px;
 	list-style:none;
 	font-size:14px;
 }
@@ -281,7 +282,8 @@ h3.timeline{
 
 div.tweetTxt{
 	float:left;
-	
+	width: 350px;
+        *width:400px;
 	overflow:hidden;
 }
 
@@ -307,4 +309,8 @@ li a:hover{
 }
 .clear{
 	clear:both;
+}
+
+input[disabled] {
+background-color: #D4D0C8;
 }
