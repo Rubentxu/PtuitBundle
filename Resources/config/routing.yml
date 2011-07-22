@@ -1,0 +1,7 @@
+_welcome:
+    pattern:  /
+    defaults: { _controller: PtuitBundle:Inicio:index }
+
+_ptuits:
+    resource: "@PtuitBundle/Controller/MensajeController.php"
+    type:     annotation

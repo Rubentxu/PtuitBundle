@@ -1,0 +1,542 @@
+/* begin Page */
+
+/* Created by Artisteer v3.0.0.32906 */
+
+#fondoBodyReflejoImagen
+{
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/page_gl.png',sizingMethod='crop')");
+  zoom: 1;
+}
+
+
+#fondoBody
+{
+   height: expression(document.documentElement.clientHeight + 'px');
+}
+
+
+img
+{
+  filter: expression(artFixPNG(this));
+}
+
+/* end Page */
+
+/* begin Box, Sheet */
+.pagina, .pagina-body
+{
+  zoom: 1;
+}
+
+.pagina-tr, .pagina-tl, .pagina-br, .pagina-bl, .pagina-tc, .pagina-bc,.pagina-cr, .pagina-cl
+{
+  font-size: 1px;
+  background: none;
+}
+
+.pagina-tr, .pagina-tl, .pagina-br, .pagina-bl
+{
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/sheet_s.png',sizingMethod='scale')");
+}
+
+.pagina-tl
+{
+  clip: rect(auto 49px 49px auto);
+}
+
+.pagina-tr
+{
+  left:expression(this.parentNode.offsetWidth-98+'px');
+  clip: rect(auto auto 49px 49px);
+}
+
+.pagina-bl
+{
+  top: expression(this.parentNode.offsetHeight-98+'px');
+  clip: rect(49px 49px auto auto);
+}
+
+.pagina-br
+{
+  top: expression(this.parentNode.offsetHeight-98+'px');
+  left:expression(this.parentNode.offsetWidth-98+'px');
+  clip: rect(49px auto auto 49px);
+}
+
+.pagina-tc, .pagina-bc
+{
+  width: expression(this.parentNode.offsetWidth-98+'px');
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/sheet_h.png',sizingMethod='scale')");
+}
+
+.pagina-tc
+{
+  clip: rect(auto auto 49px auto);
+}
+
+.pagina-bc
+{
+  top: expression(this.parentNode.offsetHeight-98+'px');
+  clip: rect(49px auto auto auto);
+}
+
+.pagina-cr, .pagina-cl
+{
+  height: expression(this.parentNode.offsetHeight-98+'px');
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/sheet_v.png',sizingMethod='scale')");
+}
+
+.pagina-cr
+{
+  left:expression(this.parentNode.offsetWidth-98+'px');
+  clip: rect(auto auto auto 49px);
+}
+
+.pagina-cl
+{
+  clip: rect(auto 49px auto auto);
+}
+
+.pagina-cc
+{
+  font-size: 1px;
+  width: expression(this.parentNode.offsetWidth-98+'px');
+  height: expression(this.parentNode.offsetHeight-98+'px');
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/sheet_c.png',sizingMethod='scale')");
+}
+/* end Box, Sheet */
+
+/* begin Header */
+div.cabecera-png
+{
+  font-size: 1px;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/header.png',sizingMethod='crop')");
+}
+/* end Header */
+
+/* begin Menu */
+.menu ul
+{
+  width: 1px;
+}
+
+.menu li.menuhover
+{
+  z-index: 10000;
+}
+
+.menu .menuhoverUL
+{
+  visibility: visible;
+}
+
+.menu .menuhoverUL
+{
+  top: 100%;
+  left: 0;
+}
+
+.menu .menuhoverUL .menuhoverUL
+{
+  top: 0;
+  left: 100%;
+}
+
+
+.menu .menuhoverUL .menuhoverUL
+{
+  top: 5px;
+  left: 100%;
+}
+
+
+.menu, .menu ul, .menu ul a
+{
+  height: 1%;
+}
+
+.menu li.menuhover
+{
+  z-index: 10000;
+}
+
+.menu .menuhoverUL
+{
+  visibility: visible;
+}
+
+.menu .menuhoverUL
+{
+  top: 100%;
+  left: 0;
+}
+
+.menu .menuhoverUL .menuhoverUL
+{
+  top: 0;
+  left: 100%;
+}
+
+
+.menu li li
+{
+  float: left;
+  width: 100%;
+}
+
+.Bnavegacion
+{
+  zoom: 1;
+  height: 48px;
+}
+
+.Bnavegacion .l, .Bnavegacion .r
+{
+  font-size: 1px;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/nav.png',sizingMethod='crop')");
+}
+
+.Bnavegacion .l
+{
+  width: expression(this.parentNode.offsetWidth-0+'px');
+}
+
+.Bnavegacion .r
+{
+  left: expression(this.parentNode.offsetWidth-974+'px');
+  clip: rect(auto auto auto 974px);
+}
+
+/* end Menu */
+
+/* begin MenuItem */
+.menu a
+{
+  float: left;
+}
+
+.menu a:hover
+{
+  visibility: visible;
+}
+
+.menu a .r, .menu a .l
+{
+  font-size: 1px;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/menuitem.png',sizingMethod='crop')");
+}
+
+.menu a .r
+{
+  left:100%;
+  margin-left:-430px;
+  clip: rect(auto auto auto 415px);
+}
+
+.menu a .l
+{
+  width: expression(this.parentNode.offsetWidth-15+'px');
+}
+
+.menuhover .menuhoverA .t
+{
+  color: #F3F3F1;
+}
+
+.menuhover .menuhoverA .l, .menuhover .menuhoverA .r
+{
+  top: -36px;
+}
+/* end MenuItem */
+
+/* begin Layout */
+.contenido, .contenido-row {display: block;}
+.contenido, .contenido-row {zoom: 1;}
+/* end Layout */
+
+/* begin Button */
+.art-button-wrapper, .art-button-wrapper .art-button-l, .art-button-wrapper .art-button-r
+{
+  zoom: 1;
+}
+
+.art-button-wrapper .art-button
+{
+  float: left;
+}
+
+.art-button-wrapper .art-button-l, .art-button-wrapper .art-button-r
+{
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/button.png',sizingMethod='crop')");
+}
+
+.art-button-wrapper .art-button-r
+{
+  left:expression(this.parentNode.offsetWidth-419+'px');
+  clip: rect(auto auto auto 406px);
+}
+
+.art-button-wrapper .art-button-l
+{
+  width: expression(this.parentNode.offsetWidth-13+'px');
+}
+/* end Button */
+
+/* begin Box, Block */
+.bloque, .bloque-body
+{
+  zoom: 1;
+}
+/* end Box, Block */
+
+/* begin BlockHeader */
+.bloqueCabecera
+{
+  zoom: 1;
+
+}
+
+.bloqueCabecera .l, .bloqueCabecera .r
+{
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/blockheader.png',sizingMethod='crop')");
+}
+
+.bloqueCabecera .r
+{
+  left:expression(this.parentNode.offsetWidth-974+'px');
+  clip: rect(auto auto auto 956px);
+}
+
+.bloqueCabecera .l
+{
+  width: expression(this.parentNode.offsetWidth-18+'px');
+}
+/* end BlockHeader */
+
+/* begin Box, BlockContent */
+.bloqueContenido, .bloqueContenido-body
+{
+  zoom: 1;
+}
+
+.bloqueContenido-tr, .bloqueContenido-tl, .bloqueContenido-br, .bloqueContenido-bl, .bloqueContenido-tc, .bloqueContenido-bc,.bloqueContenido-cr, .bloqueContenido-cl
+{
+  font-size: 1px;
+  background: none;
+}
+
+.bloqueContenido-tr, .bloqueContenido-tl, .bloqueContenido-br, .bloqueContenido-bl
+{
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/blockcontent_s.png',sizingMethod='crop')");
+}
+
+.bloqueContenido-tl
+{
+  clip: rect(auto 5px 5px auto);
+}
+
+.bloqueContenido-tr
+{
+  left:expression(this.parentNode.offsetWidth-10+'px');
+  clip: rect(auto auto 5px 5px);
+}
+
+.bloqueContenido-bl
+{
+  top: expression(this.parentNode.offsetHeight-10+'px');
+  clip: rect(5px 5px auto auto);
+}
+
+.bloqueContenido-br
+{
+  top: expression(this.parentNode.offsetHeight-10+'px');
+  left:expression(this.parentNode.offsetWidth-10+'px');
+  clip: rect(5px auto auto 5px);
+}
+
+.bloqueContenido-tc, .bloqueContenido-bc
+{
+  width: expression(this.parentNode.offsetWidth-10+'px');
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/blockcontent_h.png',sizingMethod='crop')");
+}
+
+.bloqueContenido-tc
+{
+  clip: rect(auto auto 5px auto);
+}
+
+.bloqueContenido-bc
+{
+  top: expression(this.parentNode.offsetHeight-10+'px');
+  clip: rect(5px auto auto auto);
+}
+
+.bloqueContenido-cr, .bloqueContenido-cl
+{
+  height: expression(this.parentNode.offsetHeight-10+'px');
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/blockcontent_v.png',sizingMethod='crop')");
+}
+
+.bloqueContenido-cr
+{
+  left:expression(this.parentNode.offsetWidth-10+'px');
+  clip: rect(auto auto auto 5px);
+}
+
+.bloqueContenido-cl
+{
+  clip: rect(auto 5px auto auto);
+}
+
+.bloqueContenido-cc
+{
+  font-size: 1px;
+  width: expression(this.parentNode.offsetWidth-10+'px');
+  height: expression(this.parentNode.offsetHeight-10+'px');
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/blockcontent_c.png',sizingMethod='scale')");
+}
+.bloqueContenido-body ul li
+{
+  height: 1%;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/blockcontentbullets.png',sizingMethod='crop')");
+}
+
+/* end Box, BlockContent */
+
+/* begin Box, Cptuits */
+.Cptuits, .Cptuits-body
+{
+  zoom: 1;
+}
+/* end Box, Cptuits */
+
+/* begin CptuitsMetadata, CptuitsMetadataHeader */
+.Cptuitsmetadataheader
+{
+    zoom:1;
+    }
+
+
+/* end CptuitsMetadata, CptuitsMetadataHeader */
+
+/* begin CptuitsBullets */
+.Cptuits ul li, .Cptuits ol ul li
+{
+  height: 1%;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/Cptuitsbullets.png',sizingMethod='crop')");
+  padding-left: 11px;/* makes "ul li" not to align behind the image if they are in the same line */
+  overflow-x: visible;
+  overflow-y: hidden;
+}
+
+.Cptuits ul ol li
+{
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="");
+  padding-left: 0;/* overrides overflow for "ul li" and sets the default value */
+  overflow: visible;
+}
+/* end CptuitsBullets */
+
+/* begin CptuitsQuote */
+.Cptuitscontent blockquote
+{
+  height: 1%;
+  background-image: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/Cptuitsquote.png',sizingMethod='crop')");
+}
+/* end CptuitsQuote */
+
+/* begin Footer */
+.pie, .pie-body
+{
+  zoom:1;
+}
+
+.pie-text
+{
+  height: 32px;
+}
+
+.pie-b 
+{
+  top: expression(this.parentNode.offsetHeight-15+'px');
+  width: expression(this.parentNode.offsetWidth-30+'px');
+  zoom: 1;
+  font-size: 1px;
+}
+
+.pie-r, .pie-l
+{
+  top: expression(this.parentNode.offsetHeight-15+'px');
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/footer_s.png',sizingMethod='crop')");
+  zoom: 1;
+  font-size: 1px;
+}
+
+.pie-r
+{
+  left: expression(this.parentNode.offsetWidth-30+'px');
+  clip: rect(auto auto auto 15px);
+}
+
+
+
+.pie-t
+{
+  zoom: 1;
+  font-size: 1px;
+  height: expression(this.parentNode.offsetHeight-15+'px');
+  width: 100%;
+}
+
+.rss-icon
+{
+  zoom: 1;
+  font-size: 1px;
+  background: none;
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+artGetStyleUrl()+"../imagenes/rssicon.png',sizingMethod='crop')");
+}
+
+/* end Footer */
+
+/* begin LayoutCell, content */
+
+.barraLateral {width: auto;}
+.contenido .capa, .contenido .capa .contenido .capa
+{
+  display: block;
+  position:relative;
+  float: left;
+  clear: right;
+}
+.contenido .capa, .contenido .capa .contenido .capa {zoom:1;}
+
+/* end LayoutCell, content */
+
+
+
+form#form-login ul li
+{
+  behavior: expression(this.runtimeStyle.filter?'':this.runtimeStyle.filter="");
+}
+
+/* Plugin compatilibity. */
+
+/* 150675, googlemap */
+div.map img
+{
+  behavior: none;
+  filter: none;
+}

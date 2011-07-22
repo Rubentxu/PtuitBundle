@@ -1,0 +1,9 @@
+SELECT * FROM `Amigos` Inner Join `Mensaje` WHERE Amigos.amigo_usuario_id=Mensaje.usuario_id
+
+$dql = "SELECT  m  FROM PtuitBundle:Mensaje  m, PtuitBundle:Usuario u 
+            JOIN u.Seguidores s 
+            WHERE s.id =1 
+            AND m.usuario=u.id 
+            OR m.usuario=1 
+            GROUP BY m.texto 
+            ORDER BY m.creado DESC";

@@ -1,0 +1,197 @@
+/* begin Page */
+#fondoBodyReflejoImagen
+{
+  zoom: 1;
+}
+
+img
+{
+  filter: expression(artFixPNG(this));
+}/* end Page */
+
+/* begin Box, Sheet */
+.pagina-tl
+{
+  clip: rect(auto 49px 49px auto);
+}
+
+.pagina-tr
+{
+  clip: rect(auto auto 49px 49px);
+}
+
+.pagina-bl
+{
+  clip: rect(49px 49px auto auto);
+}
+
+.pagina-br
+{
+  clip: rect(49px auto auto 49px);
+}
+
+.pagina-tc
+{
+  clip: rect(auto auto 49px auto);
+}
+
+.pagina-bc
+{
+  clip: rect(49px auto auto auto);
+}
+
+.pagina-cr
+{
+  clip: rect(auto auto auto 49px);
+}
+
+.pagina-cl
+{
+  clip: rect(auto 49px auto auto);
+}
+
+.pagina-body
+{
+  zoom: 1;
+}
+/* end Box, Sheet */
+
+/* begin Menu */
+.Bnavegacion .r
+{
+  clip: rect(auto auto auto 974px);
+}
+
+/* end Menu */
+
+/* begin MenuItem */
+.menu a .r
+{
+  clip: rect(auto auto auto 415px);
+}
+/* end MenuItem */
+
+/* begin Layout */
+.contenido, .contenido-row {display: block;}
+.contenido, .contenido-row {zoom: 1;}
+/* end Layout */
+
+/* begin Button */
+.art-button-wrapper .art-button-r
+{
+  clip: rect(auto auto auto 406px);
+}
+/* end Button */
+
+/* begin Box, Block */
+
+.bloque-body
+{
+  zoom: 1;
+}
+/* end Box, Block */
+
+/* begin BlockHeader */
+.bloqueCabecera .r
+{
+  clip: rect(auto auto auto 956px);
+}
+/* end BlockHeader */
+
+/* begin Box, BlockContent */
+.bloqueContenido-tl
+{
+  clip: rect(auto 5px 5px auto);
+}
+
+.bloqueContenido-tr
+{
+  clip: rect(auto auto 5px 5px);
+}
+
+.bloqueContenido-bl
+{
+  clip: rect(5px 5px auto auto);
+}
+
+.bloqueContenido-br
+{
+  clip: rect(5px auto auto 5px);
+}
+
+.bloqueContenido-tc
+{
+  clip: rect(auto auto 5px auto);
+}
+
+.bloqueContenido-bc
+{
+  clip: rect(5px auto auto auto);
+}
+
+.bloqueContenido-cr
+{
+  clip: rect(auto auto auto 5px);
+}
+
+.bloqueContenido-cl
+{
+  clip: rect(auto 5px auto auto);
+}
+
+.bloqueContenido-body
+{
+  zoom: 1;
+}
+/* end Box, BlockContent */
+
+/* begin Box, Cptuits */
+
+.Cptuits-body
+{
+  zoom: 1;
+}
+/* end Box, Cptuits */
+
+/* begin CptuitsContent */
+.Cptuitscontent
+{
+  height: 1%;
+}
+/* end CptuitsContent */
+
+/* begin Footer */
+.pie-r
+{
+  clip: rect(auto auto auto 15px);
+}
+
+/* end Footer */
+
+/* begin LayoutCell, content */
+.barraLateral {width: auto;}
+.contenido .capa, .contenido .capa .contenido .capa
+{
+  display: block;
+  position:relative;
+  float: left;
+  clear: right;
+}
+.contenido .capa, .contenido .capa .contenido .capa {  zoom:1; }
+.capa .capa{ float: none; clear: both;}
+/* end LayoutCell, content */
+
+
+
+/* Plugin compatilibity. */
+
+/* 154150, news pro gk1 */
+.gk_npro_full_scroll1
+{
+  position: relative;
+}
+
+.nspro_bg_wrap .art-button-wrapper a
+{
+  float: none !important;
+}

@@ -1,5 +1,0 @@
-ptuit:
-    pattern:  /ptuit
-    defaults: { _controller: PtuitBundle:Default:index }
-
-

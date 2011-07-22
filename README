@@ -1,0 +1,22 @@
+
+1-Configurar routing.yml en app/config que apunte al routing.yml de la aplicacion Ptuit:
+PtuitBundle:
+    resource: "@PtuitBundle/Resources/config/routing.yml"
+    prefix:   /
+
+2-Añadir ptuitBundle a tu kernel Symfony2 en app/AppKernel.php:
+ 
+  public function registerBundles()
+  {
+      $bundles = array(
+          // ...
+          new amiguetes\PtuitBundle\PtuitBundle();
+          // ...
+      );
+  }
+Dato la aplicacion debe estar bajo la carpeta src/amiguetes/ por lo tanto hay que crear la carpeta amiguetes.
+
+$bundles[] = new amiguetes\PtuitBundle\PtuitBundle();
+
+3-Configuracion security.yml en app/config/:
+/TODO implementar seguridad.
