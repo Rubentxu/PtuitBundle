@@ -1,48 +1,48 @@
 {% extends 'PtuitBundle::plantilla.html.twig' %}
 
-{% block contenido %}
+{% block Ptuits %}
+
+<div id="cajaMensaje">
+    <form action="#" method="post">
+        <fieldset >
+            <legend>Escribe tu ptuit</legend>
+
+            <textarea class="txtMen" name="mensaje" title="mensaje" cols="57" rows="2" ></textarea>
+            <div class="error" id="errorMensaje"></div>
+            <div class="contador" ></div>
+            <input id="botonTxt" title="enviar" name="ptuit" value="ptuit.." type="button"/>
+
+        </fieldset>
+    </form>
+</div>
+</br>
+
 <h1>Cronologia</h1>
+<div id="caja_men" >
+    <ul class="statuses">
 
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombreusuario</th>
-            <th>Creado</th>
-            <th>Modificado</th>
-            <th>Texto</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
     {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('ptuit_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.nombreusuario }}</td>
-                <td>{{ entity.creado|date('Y-m-d H:i:s') }}</td>
-                <td>{{ entity.modificado|date('Y-m-d H:i:s') }}</td>
-                <td>{{ entity.texto }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('ptuit_show', { 'id': entity.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('ptuit_edit', { 'id': entity.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-    {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
         <li>
-            <a href="{{ path('ptuit_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+            <a href="#"><img class="avatar" src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}"  alt="avatar" /></a>
+            <div class="tweetTxt"><strong><a href="#"> {{ entity.nombreusuario}}</a>: </strong>
+                        {{ entity.texto }}
+                    <div class="date">{{ entity.creado|date('d-m-Y') }}</div>
+                    <div class="flotarDer"> <a href="{{ path('ptuit_show', { 'id': entity.id }) }}">show</a></div>
+                </div>
+                
+                <div class="clear"></div>
+                
+            </li>
+    {% endfor %}
+        </ul>
+
+        <ul>
+            <li>
+                <a href="{{ path('ptuit_new') }}">
+                    Create a new entry
+                </a>
+            </li>
+        </ul>
+    </div>
 
 {% endblock %}
