@@ -18,5 +18,8 @@ Dato la aplicacion debe estar bajo la carpeta src/amiguetes/ por lo tanto hay qu
 
 $bundles[] = new amiguetes\PtuitBundle\PtuitBundle();
 
-3-Configuracion security.yml en app/config/:
+3- ejecutar comando consola para crear enlaces simbolicos a archivos de recursos estaticos:
+php app/console assets:install web --symlink
+
+4-Configuracion security.yml en app/config/:
 /TODO implementar seguridad.
