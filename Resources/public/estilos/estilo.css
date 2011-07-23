@@ -669,8 +669,8 @@ h2.logotipo-texto
     vertical-align: top;
     text-align: left;
     border: none !important;
-    margin:1em !important;
-    padding:1em !important;
+    margin:0.5em !important;
+    padding: 0.3em 0.2em !important;
 }
 .contenido .contenido{width: auto;margin:0;}
 .contenido .capa, .contenido .capa .contenido .capa{display: table-cell;}
@@ -798,7 +798,7 @@ input, select, textarea
 .bloque
 {
     position: relative;
-    margin: 0 auto;
+    margin: 0 0;
     min-width: 1px;
     min-height: 1px;
 }
@@ -812,7 +812,7 @@ input, select, textarea
 
 .bloque
 {
-    margin: 5px;
+    margin: 1px;
 }
 
 /* end Box, Block */
@@ -820,7 +820,7 @@ input, select, textarea
 /* begin BlockHeader */
 .bloqueCabecera
 {
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 }
 
 .bloqueCabecera, .bloqueCabecera h3.t
@@ -873,8 +873,7 @@ input, select, textarea
 /* begin Box, BlockContent */
 .bloqueContenido
 {
-    position: relative;
-    margin: 0 auto;
+    position: relative;    
     min-width: 11px;
     min-height: 11px;
 }
@@ -989,7 +988,7 @@ input, select, textarea
 
 .bloqueContenido-body p
 {
-    margin: 6px 0 6px 0;
+    margin: 5px 0 6px 0;
 }
 
 .bloqueContenido-body a
@@ -1436,7 +1435,7 @@ h2.Cptuitsheader img
 
 .contenido .barraLateral
 {
-    width: 300px;
+    width: 370px;
 }
 
 /* end LayoutCell, sidebar1 */
@@ -2134,7 +2133,7 @@ td.key
     background-image: none;
 }
 #cajaMensaje{
-    width: 500px;
+    width: 300px;
     padding: 0.1em 2em 2em 2em;
     *padding: 0.2em 2.5em 2.5em 2.5em;    
     font-family: sans-serif;
