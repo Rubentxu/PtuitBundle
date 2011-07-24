@@ -3,46 +3,40 @@
 {% block Ptuits %}
 
 <div id="cajaMensaje">
-    <form action="#" method="post">
-        <fieldset >
-            <legend>Escribe tu ptuit</legend>
+    <form id="formMens" action="{{ path('ptuit_create') }}" method="post">
+        {{ form_errors(form.texto,{ 'attr': {'class': 'error','id':'errorMensaje'} }) }}
+            <fieldset >
+                <legend>Escribe tu ptuit</legend>
 
-            <textarea class="txtMen" name="mensaje" title="mensaje" cols="52" rows="2" ></textarea>
-            <div class="error" id="errorMensaje"></div>
-            <div class="contador" ></div>
-            <input id="botonTxt" title="enviar" name="ptuit" value="ptuit.." type="button"/>
+                  
+                {{ form_widget(form.texto,{ 'attr': {'class': 'txtMen', 'cols':'52', 'rows':'2' } }) }}       
+                <div class="contador" ></div>
+                <input id="botonTxt" title="enviar" name="ptuit" value="ptuit.." type="submit"/>
 
-        </fieldset>
-    </form>
-</div>
-</br>
-
-<h1>Cronologia</h1>
-<div id="caja_men" >
-    <ul class="statuses">
-
-    {% for entity in entities %}
-        <li>
-            <a href="#"><img class="avatar" src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}"  alt="avatar" /></a>
-            <div class="tweetTxt"><strong><a href="#"> {{ entity.nombreusuario}}</a>: </strong>
-                        {{ entity.texto }}
-                    <div class="date">{{ entity.creado|date('d-m-Y') }}</div>
-                    <div class="flotarDer"> <a href="{{ path('ptuit_show', { 'id': entity.id }) }}">show</a></div>
-                </div>
-                
-                <div class="clear"></div>
-                
-            </li>
-    {% endfor %}
-        </ul>
-
-        <ul>
-            <li>
-                <a href="{{ path('ptuit_new') }}">
-                    Create a new entry
-                </a>
-            </li>
-        </ul>
+            </fieldset>
+            {{ form_rest(form) }}
+        </form>
     </div>
+    </br>
+
+    <h1>Cronologia</h1>
+    <div id="caja_men" >
+        <ul class="statuses">
+
+    {% for mensaje in mensajes %}
+            <li>
+                <a href="#"><img class="avatar" src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}"  alt="avatar" /></a>
+                <div class="tweetTxt"><strong><a href="#"> {{ mensaje.usuario.nick}}</a>: </strong>
+                        {{ mensaje.texto }}
+                        <div class="date">{{ mensaje.creado|date('d-m-Y') }}</div>
+                        <div class="flotarDer"> <a href="{{ path('ptuit_show', { 'id': mensaje.id }) }}">show</a></div>
+                    </div>
+
+                    <div class="clear"></div>
+
+                </li>
+    {% endfor %}
+            </ul>        
+        </div>
 
 {% endblock %}

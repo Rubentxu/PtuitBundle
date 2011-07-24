@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * amiguetes\PtuitBundle\Entity\Mensaje
- *
+ * 
  * @ORM\Table(name="Mensaje")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="amiguetes\PtuitBundle\Repository\MensajeRepository")
  */
 class Mensaje {
 
@@ -92,6 +92,7 @@ class Mensaje {
     }
 
     
+
 
 
     /**
@@ -185,6 +186,26 @@ class Mensaje {
     }
 
     /**
+     * Add replicadoPorUsuario
+     *
+     * @param amiguetes\PtuitBundle\Entity\Usuario $replicadoPorUsuario
+     */
+    public function addReplicadoPorUsuario(\amiguetes\PtuitBundle\Entity\Usuario $replicadoPorUsuario)
+    {
+        $this->replicadoPorUsuario[] = $replicadoPorUsuario;
+    }
+
+    /**
+     * Get replicadoPorUsuario
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getReplicadoPorUsuario()
+    {
+        return $this->replicadoPorUsuario;
+    }
+
+    /**
      * Add usuarioid
      *
      * @param amiguetes\PtuitBundle\Entity\Usuario $usuarioid
@@ -242,25 +263,5 @@ class Mensaje {
     public function getUsuario()
     {
         return $this->usuario;
-    }
-
-    /**
-     * Add replicadoPorUsuario
-     *
-     * @param amiguetes\PtuitBundle\Entity\Usuario $replicadoPorUsuario
-     */
-    public function addReplicadoPorUsuario(\amiguetes\PtuitBundle\Entity\Usuario $replicadoPorUsuario)
-    {
-        $this->replicadoPorUsuario[] = $replicadoPorUsuario;
-    }
-
-    /**
-     * Get replicadoPorUsuario
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getReplicadoPorUsuario()
-    {
-        return $this->replicadoPorUsuario;
     }
 }

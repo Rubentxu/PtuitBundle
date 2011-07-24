@@ -156,17 +156,18 @@ jQuery.fn.cuentaCaracteres= function(){
 function enviarMensaje(){
 
     var texto=$(".txtMen").attr("value");
-
+    var url=$("#formMens").attr('action');
+    var token=$("#form__token").attr('value');
     $(".txtMen").val("");
     $('.contador').text('');
     $.ajax({
-        url:"index.php",
+        url:url,
         async: true,
         type: "POST",
         dataType: "json",
         contentType: "application/x-www-form-urlencoded",
-        data:"controlador=mensaje&accion=crearMensaje&formulario=CajaMensaje&txtMen="+texto,
-        beforeSend: inicioEnvio,
+        data:"texto="+texto+"&Mensaje[_token]="+token,
+        beforeSend: inicioEnvio,    
         success:llegadaDatos,
         complete: completado,
         timeout: 4000,
@@ -183,27 +184,19 @@ function inicioEnvio (datos){
 }
 function llegadaDatos (datos){
     
-    if(datos.validado=='FALSE'){
-        var errorMensaje =$('#errorMensaje');
-        errorMensaje.text(datos.msgError);
-        errorMensaje.show('slow');
-        
-    }else {
+        alert('los datos son: '+datos.texto);
        var msg= '<li><a href="#"><img class="avatar" src="/web/imagen/ptuit.png"  alt="avatar" /></a>'+
-	'<div class="tweetTxt"><strong><a href="#"> ' +datos.datosMensajes.usuario+ ' </a></strong>'+
-                    datos.datosMensajes.texto+'<div class="date">'+datos.datosMensajes.fmod+ '</div>'+
+	'<div class="tweetTxt"><strong><a href="#"> ' +datos.usuario+ ' </a></strong>'+
+                    datos.texto+'<div class="date">'+datos.fecha+ '</div>'+
 	'</div>	<div class="clear"></div></li>';
         
-        //        caj.html('<div class="ptuits"><img class="avatar" label="ptuit" src="/web/imagen/ptuit.png"></img><span class="avatarTxt"><em style="color:blue;">'
-        //            +datos.datosMensajes.usuario+' :</em> '+datos.datosMensajes.texto+
-        //            '</span><span style="color:#FFF;float: right;">'+datos.datosMensajes.fmod+'</span></div></div>');
-        //        avatar.text($('#caja_men'));
+        
         $('ul.statuses li:first-child').before(msg);
         $("ul.statuses:empty").append(msg);
         $('#lastTweet').html($('#inputField').val());
         $('#inputField').val('');
         
-    }
+    
     $(".txtMen").removeClass("txtMenCargando");
 }
 function problemasEnvio(objeto, quepaso, otroobj){

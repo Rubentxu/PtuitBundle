@@ -8,22 +8,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use amiguetes\PtuitBundle\Entity\Mensaje;
 use amiguetes\PtuitBundle\Form\MensajeType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Mensaje controller.
  *
  * @Route("/ptuit")
  */
-class MensajeController extends Controller
-{
+class MensajeController extends Controller {
+
     /**
      * Lists all Mensaje entities.
      *
      * @Route("/", name="ptuit")
      * @Template()
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('PtuitBundle:Mensaje')->findAll();
@@ -37,8 +37,7 @@ class MensajeController extends Controller
      * @Route("/{id}/show", name="ptuit_show")
      * @Template()
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('PtuitBundle:Mensaje')->find($id);
@@ -50,7 +49,7 @@ class MensajeController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -61,14 +60,13 @@ class MensajeController extends Controller
      * @Route("/new", name="ptuit_new")
      * @Template()
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Mensaje();
-        $form   = $this->createForm(new MensajeType(), $entity);
+        $form = $this->createForm(new MensajeType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView()
+            'form' => $form->createView()
         );
     }
 
@@ -79,29 +77,36 @@ class MensajeController extends Controller
      * @Method("post")
      * @Template("PtuitBundle:Mensaje:new.html.twig")
      */
-    public function createAction()
-    {
-        $entity  = new Mensaje();
+    public function createAction() {
+        $mensaje = new Mensaje();
         $request = $this->getRequest();
-        $form    = $this->createForm(new MensajeType(), $entity);
+        $texto=$request->get('texto');
+        $mensaje->setTexto($texto);
+        $mensaje->setNombreusuario("rubentxu");
+        $formulario = $this->createForm(new MensajeType(), $mensaje, 
+                array('data'=> array() ));
+        
+        
 
         if ('POST' === $request->getMethod()) {
-            $form->bindRequest($request);
+            $formulario->bindRequest($request);
 
-            if ($form->isValid()) {
+            if ($formulario->isValid()) {
+                // realiza alguna acción, tal como guardar el objeto en la base de datos
                 $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($entity);
+                $em->persist($mensaje);
                 $em->flush();
-
-                return $this->redirect($this->generateUrl('ptuit_show', array('id' => $entity->getId())));
-                
+                $response = new Response(json_encode(array('texto'=>$mensaje->getTexto(), 'usuario'=>$mensaje
+                        ->getNombreusuario(),'fecha'=>$mensaje->getCreado())));
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
             }
-        }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        );
+            return array(
+                'entity' => $mensaje,
+                'form' => $formulario->createView()
+            );
+        }
     }
 
     /**
@@ -110,8 +115,7 @@ class MensajeController extends Controller
      * @Route("/{id}/edit", name="ptuit_edit")
      * @Template()
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('PtuitBundle:Mensaje')->find($id);
@@ -124,8 +128,8 @@ class MensajeController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -137,8 +141,7 @@ class MensajeController extends Controller
      * @Method("post")
      * @Template("PtuitBundle:Mensaje:edit.html.twig")
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('PtuitBundle:Mensaje')->find($id);
@@ -147,7 +150,7 @@ class MensajeController extends Controller
             throw $this->createNotFoundException('Unable to find Mensaje entity.');
         }
 
-        $editForm   = $this->createForm(new MensajeType(), $entity);
+        $editForm = $this->createForm(new MensajeType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -165,8 +168,8 @@ class MensajeController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -177,8 +180,7 @@ class MensajeController extends Controller
      * @Route("/{id}/delete", name="ptuit_delete")
      * @Method("post")
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -201,11 +203,11 @@ class MensajeController extends Controller
         return $this->redirect($this->generateUrl('ptuit'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                ->add('id', 'hidden')
+                ->getForm()
         ;
     }
+
 }

@@ -1,7 +1,22 @@
-_welcome:
+_cronologia:
     pattern:  /
     defaults: { _controller: PtuitBundle:Inicio:index }
 
 _ptuits:
     resource: "@PtuitBundle/Controller/MensajeController.php"
     type:     annotation
+    
+registro:
+    pattern:   /registro
+    defaults:  { _controller: PtuitBundle:Security:registro }
+    
+login:
+    pattern:   /login
+    defaults:  { _controller: PtuitBundle:Security:login }
+
+login_check:
+    pattern:   /seguridad/login_check
+    
+logout:
+    pattern:   /logout
+    
