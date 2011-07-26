@@ -4,6 +4,7 @@ namespace amiguetes\PtuitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * amiguetes\PtuitBundle\Entity\Usuario
@@ -11,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="Usuario")
  * @ORM\Entity
  */
-class Usuario {
+class Usuario implements UserInterface, \Serializable {
 
     /**
      * @var integer $id
@@ -118,7 +119,50 @@ class Usuario {
      */
     private $mensajesReplicados;
 
+    function getRoles() {
+        return array('ROLE_USER');
+    }
 
+    /**
+     * Returns the salt.
+     *
+     * @return string The salt
+     */
+    function getSalt() {
+        return FALSE;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     */
+    function getUsername() {
+        return $this->email;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * @return void
+     */
+    function eraseCredentials() {
+        return FALSE;
+    }
+
+    /**
+     * The equality comparison should neither be done by referential equality
+     * nor by comparing identities (i.e. getId() === getId()).
+     *
+     * However, you do not need to compare every attribute, but only those that
+     * are relevant for assessing whether re-authentication is required.
+     *
+     * @param UserInterface $user
+     * @return Boolean
+     */
+    function equals(UserInterface $user) {
+        $this->getUsername() == $user->getUsername();
+    }
 
     public function __construct() {
         $this->mensajeid = new ArrayCollection();
@@ -129,16 +173,12 @@ class Usuario {
         $this->mensajesReplicados = new ArrayCollection();
     }
 
-    
-
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -147,8 +187,7 @@ class Usuario {
      *
      * @param string $nick
      */
-    public function setNick($nick)
-    {
+    public function setNick($nick) {
         $this->nick = $nick;
     }
 
@@ -157,8 +196,7 @@ class Usuario {
      *
      * @return string 
      */
-    public function getNick()
-    {
+    public function getNick() {
         return $this->nick;
     }
 
@@ -167,8 +205,7 @@ class Usuario {
      *
      * @param string $nombre
      */
-    public function setNombre($nombre)
-    {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
@@ -177,8 +214,7 @@ class Usuario {
      *
      * @return string 
      */
-    public function getNombre()
-    {
+    public function getNombre() {
         return $this->nombre;
     }
 
@@ -187,8 +223,7 @@ class Usuario {
      *
      * @param string $pass
      */
-    public function setPass($pass)
-    {
+    public function setPassword($pass) {
         $this->pass = $pass;
     }
 
@@ -197,8 +232,7 @@ class Usuario {
      *
      * @return string 
      */
-    public function getPass()
-    {
+    public function getPassword() {
         return $this->pass;
     }
 
@@ -207,8 +241,7 @@ class Usuario {
      *
      * @param string $email
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
     }
 
@@ -217,8 +250,7 @@ class Usuario {
      *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -227,8 +259,7 @@ class Usuario {
      *
      * @param string $telefono
      */
-    public function setTelefono($telefono)
-    {
+    public function setTelefono($telefono) {
         $this->telefono = $telefono;
     }
 
@@ -237,8 +268,7 @@ class Usuario {
      *
      * @return string 
      */
-    public function getTelefono()
-    {
+    public function getTelefono() {
         return $this->telefono;
     }
 
@@ -247,8 +277,7 @@ class Usuario {
      *
      * @param integer $edad
      */
-    public function setEdad($edad)
-    {
+    public function setEdad($edad) {
         $this->edad = $edad;
     }
 
@@ -257,8 +286,7 @@ class Usuario {
      *
      * @return integer 
      */
-    public function getEdad()
-    {
+    public function getEdad() {
         return $this->edad;
     }
 
@@ -267,8 +295,7 @@ class Usuario {
      *
      * @param text $intereses
      */
-    public function setIntereses($intereses)
-    {
+    public function setIntereses($intereses) {
         $this->intereses = $intereses;
     }
 
@@ -277,8 +304,7 @@ class Usuario {
      *
      * @return text 
      */
-    public function getIntereses()
-    {
+    public function getIntereses() {
         return $this->intereses;
     }
 
@@ -287,8 +313,7 @@ class Usuario {
      *
      * @param text $biografia
      */
-    public function setBiografia($biografia)
-    {
+    public function setBiografia($biografia) {
         $this->biografia = $biografia;
     }
 
@@ -297,8 +322,7 @@ class Usuario {
      *
      * @return text 
      */
-    public function getBiografia()
-    {
+    public function getBiografia() {
         return $this->biografia;
     }
 
@@ -307,8 +331,7 @@ class Usuario {
      *
      * @param string $localizacion
      */
-    public function setLocalizacion($localizacion)
-    {
+    public function setLocalizacion($localizacion) {
         $this->localizacion = $localizacion;
     }
 
@@ -317,8 +340,7 @@ class Usuario {
      *
      * @return string 
      */
-    public function getLocalizacion()
-    {
+    public function getLocalizacion() {
         return $this->localizacion;
     }
 
@@ -327,8 +349,7 @@ class Usuario {
      *
      * @param string $web
      */
-    public function setWeb($web)
-    {
+    public function setWeb($web) {
         $this->web = $web;
     }
 
@@ -337,8 +358,7 @@ class Usuario {
      *
      * @return string 
      */
-    public function getWeb()
-    {
+    public function getWeb() {
         return $this->web;
     }
 
@@ -347,8 +367,7 @@ class Usuario {
      *
      * @param string $avatar
      */
-    public function setAvatar($avatar)
-    {
+    public function setAvatar($avatar) {
         $this->avatar = $avatar;
     }
 
@@ -357,8 +376,7 @@ class Usuario {
      *
      * @return string 
      */
-    public function getAvatar()
-    {
+    public function getAvatar() {
         return $this->avatar;
     }
 
@@ -367,8 +385,7 @@ class Usuario {
      *
      * @param amiguetes\PtuitBundle\Entity\Mensaje $mensajeid
      */
-    public function addMensajeid(\amiguetes\PtuitBundle\Entity\Mensaje $mensajeid)
-    {
+    public function addMensajeid(\amiguetes\PtuitBundle\Entity\Mensaje $mensajeid) {
         $this->mensajeid[] = $mensajeid;
     }
 
@@ -377,8 +394,7 @@ class Usuario {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getMensajeid()
-    {
+    public function getMensajeid() {
         return $this->mensajeid;
     }
 
@@ -387,8 +403,7 @@ class Usuario {
      *
      * @param amiguetes\PtuitBundle\Entity\Usuario $seguidores
      */
-    public function addSeguidores(\amiguetes\PtuitBundle\Entity\Usuario $seguidores)
-    {
+    public function addSeguidores(\amiguetes\PtuitBundle\Entity\Usuario $seguidores) {
         $this->Seguidores[] = $seguidores;
     }
 
@@ -397,8 +412,7 @@ class Usuario {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getSeguidores()
-    {
+    public function getSeguidores() {
         return $this->Seguidores;
     }
 
@@ -407,8 +421,7 @@ class Usuario {
      *
      * @param amiguetes\PtuitBundle\Entity\Usuario $seguidos
      */
-    public function addSeguidos(\amiguetes\PtuitBundle\Entity\Usuario $seguidos)
-    {
+    public function addSeguidos(\amiguetes\PtuitBundle\Entity\Usuario $seguidos) {
         $this->Seguidos[] = $seguidos;
     }
 
@@ -417,8 +430,7 @@ class Usuario {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getSeguidos()
-    {
+    public function getSeguidos() {
         return $this->Seguidos;
     }
 
@@ -427,8 +439,7 @@ class Usuario {
      *
      * @param amiguetes\PtuitBundle\Entity\Mensaje_Interno $mensajesRecibidos
      */
-    public function addMensajesRecibidos(\amiguetes\PtuitBundle\Entity\Mensaje_Interno $mensajesRecibidos)
-    {
+    public function addMensajesRecibidos(\amiguetes\PtuitBundle\Entity\Mensaje_Interno $mensajesRecibidos) {
         $this->mensajesRecibidos[] = $mensajesRecibidos;
     }
 
@@ -437,8 +448,7 @@ class Usuario {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getMensajesRecibidos()
-    {
+    public function getMensajesRecibidos() {
         return $this->mensajesRecibidos;
     }
 
@@ -447,8 +457,7 @@ class Usuario {
      *
      * @param amiguetes\PtuitBundle\Entity\Mensaje_Interno $mensajesEnviados
      */
-    public function addMensajesEnviados(\amiguetes\PtuitBundle\Entity\Mensaje_Interno $mensajesEnviados)
-    {
+    public function addMensajesEnviados(\amiguetes\PtuitBundle\Entity\Mensaje_Interno $mensajesEnviados) {
         $this->mensajesEnviados[] = $mensajesEnviados;
     }
 
@@ -457,8 +466,7 @@ class Usuario {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getMensajesEnviados()
-    {
+    public function getMensajesEnviados() {
         return $this->mensajesEnviados;
     }
 
@@ -467,8 +475,7 @@ class Usuario {
      *
      * @param amiguetes\PtuitBundle\Entity\Mensaje $mensajesReplicados
      */
-    public function addMensajesReplicados(\amiguetes\PtuitBundle\Entity\Mensaje $mensajesReplicados)
-    {
+    public function addMensajesReplicados(\amiguetes\PtuitBundle\Entity\Mensaje $mensajesReplicados) {
         $this->mensajesReplicados[] = $mensajesReplicados;
     }
 
@@ -477,8 +484,47 @@ class Usuario {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getMensajesReplicados()
-    {
+    public function getMensajesReplicados() {
         return $this->mensajesReplicados;
     }
+
+    public function serialize() {
+        return serialize(array(
+            'id' => $this->getId(),
+            'nick' => $this->getNick(),
+            'nombre' => $this->getNombre(),
+            'email' => $this->getEmail(),
+            'pass' => $this->getPassword(),
+            'telefono' => $this->getTelefono(),
+            'edad' => $this->getEdad(),
+            'intereses' => $this->getIntereses(),
+            'biografia' => $this->getBiografia(),
+            'localizacion' => $this->getLocalizacion(),
+            'web' => $this->getWeb(),
+            'avatar' => $this->getAvatar(),
+            'Seguidores' => $this->getSeguidores(),
+            'Seguidos' => $this->getSeguidos()
+        ));
+    }
+
+    public function unserialize($strSerialized) {
+        $serialized = unserialize($strSerialized);
+
+
+        $this->id=$serialized['id'];
+        $this->nick=$serialized['nick'];
+        $this->nombre=$serialized['nombre'];
+        $this->email=$serialized['email'];
+        $this->pass=$serialized['pass'];
+        $this->telefono=$serialized['telefono'];
+        $this->edad=$serialized['edad'];
+        $this->intereses=$serialized['intereses'];
+        $this->biografia=$serialized['biografia'];
+        $this->localizacion=$serialized['localizacion'];
+        $this->web=$serialized['web'];
+        $this->avatar=$serialized['avatar'];
+        $this->Seguidores=$serialized['Seguidores'];
+        $this->Seguidos=$serialized['Seguidos'];
+    }
+
 }

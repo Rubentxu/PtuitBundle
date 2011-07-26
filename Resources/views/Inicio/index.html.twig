@@ -8,7 +8,7 @@
             <fieldset >
                 <legend>Escribe tu ptuit</legend>
 
-                  
+
                 {{ form_widget(form.texto,{ 'attr': {'class': 'txtMen', 'cols':'52', 'rows':'2' } }) }}       
                 <div class="contador" ></div>
                 <input id="botonTxt" title="enviar" name="ptuit" value="ptuit.." type="submit"/>
@@ -40,3 +40,39 @@
         </div>
 
 {% endblock %}
+{% block bloquesLaterales %}  
+        <div class="bloque">
+            <div class="bloque-body">
+                <div class="bloqueCabecera">
+                    <div class="l"></div>
+                    <div class="r"></div>
+                    <h3 class="t">Perfil Usuario</h3>
+                </div>
+                <div class="bloqueContenido">
+                    <div class="bloqueContenido-tl"></div>
+                    <div class="bloqueContenido-tr"></div>
+                    <div class="bloqueContenido-bl"></div>
+                    <div class="bloqueContenido-br"></div>
+                    <div class="bloqueContenido-tc"></div>
+                    <div class="bloqueContenido-bc"></div>
+                    <div class="bloqueContenido-cl"></div>
+                    <div class="bloqueContenido-cr"></div>
+                    <div class="bloqueContenido-cc"></div>
+                    <div class="bloqueContenido-body">
+                        <p>{{usuario.nombre}}</p>
+                        <p>{{usuario.email}}</p>
+                        <h3>Seguidores {{ usuario.Seguidores |length}}</h3>
+                        {% for seguidor in usuario.Seguidores %}
+                        <p>{{seguidor.nombre}}</p>
+                        {% endfor %}
+                         <h3>Seguidos {{ usuario.Seguidos |length}}</h3>
+                        {% for seguidor in usuario.Seguidos %}
+                        <p>{{seguidor.nombre}}</p>
+                        {% endfor %}
+                        <div class="cleared"></div>
+                    </div>
+                </div>
+                <div class="cleared"></div>
+            </div>
+        </div>
+ {% endblock %}
