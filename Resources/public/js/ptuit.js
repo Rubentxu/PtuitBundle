@@ -164,7 +164,7 @@ function enviarMensaje(){
         url:url,
         async: true,
         type: "POST",
-        dataType: "json",
+        dataType: "html",
         contentType: "application/x-www-form-urlencoded",
         data:"texto="+texto+"&Mensaje[_token]="+token,
         beforeSend: inicioEnvio,    
@@ -184,17 +184,12 @@ function inicioEnvio (datos){
 }
 function llegadaDatos (datos){
     
-        alert('los datos son: '+datos.texto);
-       var msg= '<li><a href="#"><img class="avatar" src="/web/imagen/ptuit.png"  alt="avatar" /></a>'+
-	'<div class="tweetTxt"><strong><a href="#"> ' +datos.usuario+ ' </a></strong>'+
-                    datos.texto+'<div class="date">'+datos.fecha+ '</div>'+
-	'</div>	<div class="clear"></div></li>';
-        
-        
-        $('ul.statuses li:first-child').before(msg);
-        $("ul.statuses:empty").append(msg);
-        $('#lastTweet').html($('#inputField').val());
-        $('#inputField').val('');
+    alert('los datos son: '+datos);
+           
+    $('ul.statuses li:first-child').before(datos);
+    $("ul.statuses:empty").append(datos);
+    $('#lastTweet').html($('#inputField').val());
+    $('#inputField').val('');
         
     
     $(".txtMen").removeClass("txtMenCargando");

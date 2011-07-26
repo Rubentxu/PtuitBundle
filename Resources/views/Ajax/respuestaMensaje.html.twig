@@ -1,0 +1,16 @@
+{# Este es la respuesta Ajax al mandar el Mensaje/Ptuit #}
+{%spaceless%}
+{% if listaErrores %}
+{% for error in listaErrores %}
+    <p class="error">{{ error.message }}</p>
+{% endfor %}
+{%else %}
+<li><a href="#"><img class="avatar" src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}" /></a>
+    <div class="tweetTxt"><strong><a href="#"> {{ mensaje.usuario.nick}}</a>:</strong>
+        {{mensaje.texto}}<div class="date">{{ mensaje.creado|date('d-m-Y') }}</div>
+        </div>
+        <div class="flotarDer"> <a href="{{ path('ptuit_show', { 'id': mensaje.id }) }}">show</a></div>
+        <div class="clear"></div>
+ </li>
+{%endif%} 
+{%endspaceless%}

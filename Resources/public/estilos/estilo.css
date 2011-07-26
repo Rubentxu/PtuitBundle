@@ -800,20 +800,18 @@ input, select, textarea
     position: relative;
     margin: 0 0;
     min-width: 1px;
-    min-height: 1px;
+    min-height: 300px;
 }
 
 .bloque-body
 {
     position: relative;
     padding: 0;
+    
 }
 
 
-.bloque
-{
-    margin: 1px;
-}
+
 
 /* end Box, Block */
 
@@ -875,13 +873,14 @@ input, select, textarea
 {
     position: relative;    
     min-width: 11px;
-    min-height: 11px;
+    min-height: 700px;
 }
 
 .bloqueContenido-body
 {
     position: relative;
     padding: 8px;
+    min-height: 700px;
 }
 
 .bloqueContenido-tr, .bloqueContenido-tl, .bloqueContenido-br, .bloqueContenido-bl, .bloqueContenido-tc, .bloqueContenido-bc,.bloqueContenido-cr, .bloqueContenido-cl
@@ -1986,14 +1985,14 @@ td.key
 }
 
 /* System Error Messages */
-#system-message dd.error ul
+.error
 {
     color: #c00;
-    background: #e6c0c0 url(../../system/../imagenes/notice-alert.png) 4px center no-repeat;
+    background: #e6c0c0 url(../imagenes/alert2.jpeg) 2px center no-repeat;
     border-top: 3px solid #DE7A7B;
     border-bottom: 3px solid #DE7A7B;
     margin: 0;
-    padding-left: 40px;
+    padding-left: 45px;
     text-indent: 0;
 }
 

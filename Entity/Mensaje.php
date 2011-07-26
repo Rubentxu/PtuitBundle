@@ -4,6 +4,7 @@ namespace amiguetes\PtuitBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * amiguetes\PtuitBundle\Entity\Mensaje
@@ -21,28 +22,27 @@ class Mensaje {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+  
     /**
-     * @var string $nombreusuario
-     *
-     * @ORM\Column(name="nombreUsuario", type="string", length=50, nullable=true)
-     */
-    private $nombreusuario;
-    /**
-     * @var datetime $fecha
-     *
+     * @var datetime $fecha     
      * @ORM\Column(name="creado", type="datetime", nullable=true)
+     * @Assert\Type(type="\DateTime")
      */
     private $creado;
     /**
      * @var datetime $modificado
      *
      * @ORM\Column(name="modificado", type="datetime", nullable=true)
+     * @Assert\Type(type="\DateTime")
      */
     private $modificado;
     /**
      * @var string $texto
      *
      * @ORM\Column(name="texto", type="string", length=160, nullable=true)
+     * @Assert\NotBlank( message = "Por favor, escriba algo")
+     * @Assert\MinLength(limit=2 , message = "Por favor,escriba al menos 2 caracteres")
+     * @Assert\MaxLength(limit=160, message = "Por favor,no exceda de los 160 caracteres")
      */
     private $texto;
     /**     
@@ -78,8 +78,8 @@ class Mensaje {
      *
      * @ORM\ManyToOne(targetEntity="Usuario")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
-     * })
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")})
+     * @Assert\NotNull
      */
     private $usuario;
 
@@ -103,27 +103,7 @@ class Mensaje {
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nombreusuario
-     *
-     * @param string $nombreusuario
-     */
-    public function setNombreusuario($nombreusuario)
-    {
-        $this->nombreusuario = $nombreusuario;
-    }
-
-    /**
-     * Get nombreusuario
-     *
-     * @return string 
-     */
-    public function getNombreusuario()
-    {
-        return $this->nombreusuario;
-    }
+    }  
 
     /**
      * Set creado

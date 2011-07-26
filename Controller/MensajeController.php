@@ -75,37 +75,39 @@ class MensajeController extends Controller {
      *
      * @Route("/create", name="ptuit_create")
      * @Method("post")
-     * @Template("PtuitBundle:Mensaje:new.html.twig")
+     * @Template("PtuitBundle:Ajax:respuestaMensaje.html.twig")
      */
     public function createAction() {
+
+        $usuario = $this->get('security.context')->getToken()->getUser();
         $mensaje = new Mensaje();
-        $request = $this->getRequest();
-        $texto=$request->get('texto');
-        $mensaje->setTexto($texto);
-        $mensaje->setNombreusuario("rubentxu");
-        $formulario = $this->createForm(new MensajeType(), $mensaje, 
-                array('data'=> array() ));
-        
-        
+        $request = $this->getRequest();        
+        $mensaje->setTexto($request->get('texto'));
+        $mensaje->setUsuario($usuario);
+        $mensaje->setCreado(new \DateTime());
+
+        $validador = $this->get('validator');
+        $listaErrores = $validador->validate($mensaje);
+
+
+
+// TODO Implementar recogida de tags en el texto palabras que empiecen por #
+        //$mensaje->addTagid($tagid);
 
         if ('POST' === $request->getMethod()) {
-            $formulario->bindRequest($request);
 
-            if ($formulario->isValid()) {
-                // realiza alguna acción, tal como guardar el objeto en la base de datos
+            if (count($listaErrores) > 0) {            
+                
+                return array('listaErrores'=>$listaErrores);
+                
+            } else {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($mensaje);
                 $em->flush();
-                $response = new Response(json_encode(array('texto'=>$mensaje->getTexto(), 'usuario'=>$mensaje
-                        ->getNombreusuario(),'fecha'=>$mensaje->getCreado())));
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            }
 
-            return array(
-                'entity' => $mensaje,
-                'form' => $formulario->createView()
-            );
+                return array('mensaje'=> $mensaje,
+                    'listaErrores'=>'');
+            }
         }
     }
 

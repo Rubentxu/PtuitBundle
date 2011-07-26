@@ -61,13 +61,13 @@
                     <div class="bloqueContenido-body">
                         <p>{{usuario.nombre}}</p>
                         <p>{{usuario.email}}</p>
-                        <h3>Seguidores {{ usuario.Seguidores |length}}</h3>
+                        <h3>Seguidores: {{ usuario.Seguidores |length}}</h3>
                         {% for seguidor in usuario.Seguidores %}
                         <p>{{seguidor.nombre}}</p>
                         {% endfor %}
-                         <h3>Seguidos {{ usuario.Seguidos |length}}</h3>
-                        {% for seguidor in usuario.Seguidos %}
-                        <p>{{seguidor.nombre}}</p>
+                         <h3>Seguidos: {{ usuario.Seguidos |length}}</h3>
+                        {% for seguido in usuario.Seguidos %}
+                        <p>{{seguido.nombre}}</p>
                         {% endfor %}
                         <div class="cleared"></div>
                     </div>

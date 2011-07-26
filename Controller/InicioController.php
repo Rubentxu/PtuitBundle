@@ -20,10 +20,7 @@ class InicioController extends Controller {
 
         $em = $this->getDoctrine()->getEntityManager();
         $mensajes = $em->getRepository('PtuitBundle:Mensaje')
-                ->findCronologia($id);
-
-        $usuario = $em->getRepository('PtuitBundle:Usuario')
-                ->find($id);
+                ->findCronologia($id);        
 
 
 
