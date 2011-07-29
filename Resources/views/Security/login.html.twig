@@ -1,15 +1,22 @@
 {% extends 'PtuitBundle::plantilla.html.twig' %}
+
+{% block alertas %}
+   <div id="alert" >
+       {% if error %}
+          {{ error.message }}
+       {% endif %} 
+   </div>
+{% endblock %}
 {% block barraNavegacion %}
 <div class="Bnavegacion">
-    <div class="l"></div>
+    <div class="l">
+</div>
     <div class="r"></div>
 
 </div>
 {% endblock %}
 {% block contenido %}
-{% if error %}
-    <div>{{ error.message }}</div>
-{% endif %} 
+
 <div class="bloqueCabecera">
     <div class="l"></div>
     <div class="r"></div>
@@ -26,19 +33,19 @@
     <div class="bloqueContenido-cr"></div>
     <div class="bloqueContenido-cc"></div>
     <div class="bloqueContenido-body">
-        <form action="{{ path('login_check') }}" method="post" name="login_check" id="form-login" >
-            <fieldset class="input">
-                <p id="form-login-username">
-                    <label for="modlgn_username">Usuario</label><br />
+        <form action="{{ path('login_check') }}" method="post" name="login_check"  >
+            <fieldset >
+                <p >
+                    <label for="modlgn_username">Email</label><br />
                     <input id="modlgn_username" type="text" name="_username" 
                            class="inputbox" alt="username" size="18" value="{{ last_username }}" />
                 </p>
-                <p id="form-login-password">
+                <p >
                     <label for="modlgn_passwd">Password</label><br />
                     <input id="modlgn_passwd" type="password" name="_password" 
                            class="inputbox" size="18" alt="password" />
                 </p>
-                <p id="form-login-remember">
+                <p >
                     <label for="modlgn_remember">Recordar</label>
                     <input id="modlgn_remember" type="checkbox" name="remember" 
                            class="inputbox" value="yes" alt="Remember Me" />
@@ -48,12 +55,14 @@
                     <span class="art-button-r"> </span>
                     <input type="submit" name="Submit" class="art-button" value="Login" />
                 </span>
+                {% if error %}
+                    <div class="error">{{ error.message }}</div>
+                {% endif %} 
             </fieldset>
-            <p>Para ver una demostracion de la aplicacion entrar con Usuario: demo1234 y Password: demo1234</p>
+            <p>Para ver una demostracion de la aplicacion entrar con Usuario: demo1234@ptuit.com y Password: demo1234</p>
             <ul>
-                <li><a href="#">Forgot your password?</a></li>
-                <li><a href="#">Forgot your username?</a></li>
-                <li><a href="#">Create an account</a></li>
+                <li><a href="#">Perdiste tu password?</a></li>                
+                <li><a href="{{path('registro')}}">Registrarse</a></li>
             </ul>
         </form>
 

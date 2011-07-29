@@ -807,7 +807,7 @@ input, select, textarea
 {
     position: relative;
     padding: 0;
-    
+
 }
 
 
@@ -873,14 +873,14 @@ input, select, textarea
 {
     position: relative;    
     min-width: 11px;
-    min-height: 700px;
+    min-height: 300px;
 }
 
 .bloqueContenido-body
 {
     position: relative;
     padding: 8px;
-    min-height: 700px;
+    min-height: 300px;
 }
 
 .bloqueContenido-tr, .bloqueContenido-tl, .bloqueContenido-br, .bloqueContenido-bl, .bloqueContenido-tc, .bloqueContenido-bc,.bloqueContenido-cr, .bloqueContenido-cl
@@ -1740,71 +1740,24 @@ table.adminform textarea
 
 div.search input
 {
-    width: 95%;
+    width: 75%;
     border: 1px solid #ccc;
     margin: 15px 0 10px 0;
 }
 
-form#form-login
-{
-    text-align: left;
-}
 
-form#form-login fieldset
-{
-    border: 0 none;
-    margin: 0;
-    padding: 0.2em;
-}
-
-form#form-login ul
-{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-form#form-login ul li
-{
-    background-image: none;
-    padding: 0;
-}
 
 #modlgn_username, #modlgn_passwd
 {
-    width: 90%;
+    width: 70%;
+
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
-#form-login-username, #form-login-password, #form-login-remember
-{
-    display: block;
-    margin: 0;
-}
 
-form#com-form-login
-{
-    text-align: left;
-}
-
-form#com-form-login fieldset
-{
-    border: 0 none;
-    margin: 0;
-    padding: 0.2em;
-}
-
-form#com-form-login ul
-{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-form#com-form-login ul li
-{
-    background-image: none;
-    padding: 0;
-}
 
 /* thumbnails */
 div.mosimage
@@ -1923,8 +1876,12 @@ span.description
 fieldset
 {
     border: 3px double #0B4850;
-    margin-top: 15px;
-    padding: 15px;
+    margin:  auto 25%;
+
+}
+.mensaje
+{
+    margin:  10% ;    
 }
 
 legend
@@ -2132,14 +2089,17 @@ td.key
     background-image: none;
 }
 #cajaMensaje{
-    width: 300px;
-    padding: 0.1em 2em 2em 2em;
-    *padding: 0.2em 2.5em 2.5em 2.5em;    
+    width: 300px;    
     font-family: sans-serif;
 
 }
 
+.textAreaRegistro{
+    padding: 4px;
+    width: 240px; 
+    height: 120px
 
+}
 
 .txtMen{
     text-align: left;
@@ -2150,7 +2110,7 @@ td.key
 }
 #botonTxt{
     float: right;
-    margin-right: 1em;
+    margin-right: 0.5em;
 
 }
 
@@ -2159,26 +2119,26 @@ td.key
 }
 
 img.avatar{
-	float:left;
-	margin-right:10px;
-	border:0px solid #0B3850;
+    float:left;
+    margin-right:10px;
+    border:0px solid #0B3850;
 }
 div.date{
-	line-height:18px;
-	font-size:12px;
-	color:#ffffff;
+    line-height:18px;
+    font-size:12px;
+    color:#ffffff;
 }
 li a, li a:visited {
-	color:#0B4850;
-	text-decoration:none;
-	outline:none;
+    color:#0B4850;
+    text-decoration:none;
+    outline:none;
 }
 
 li a:hover{
-	text-decoration:underline;
+    text-decoration:underline;
 }
 .clear{
-	clear:both;
+    clear:both;
 }
 ul.marquee {
     /* required styles */
@@ -2209,26 +2169,51 @@ ul.marquee li {
     padding: 3px 5px;
 }
 ul.statuses{
-	margin:5px 0;
+    margin:5px 0;
 }
 
 ul.statuses li {
-	
-	border-bottom:1px solid #505660;
-	padding:10px 0px ;
-        *padding:10px 10px;
-	list-style:none;
-	font-size:14px;
+
+    border-bottom:1px solid #505660;
+    padding:10px 0px ;
+    *padding:10px 10px;
+    list-style:none;
+    font-size:14px;
 }
 
 ul.statuses li:first-child{
-	border-top:5px double #505660;
+    border-top:5px double #505660;
 }
 
 ul.statuses li:hover {
-	background-color:#808690;
+    background-color:#808690;
 }
 .flotarDer{
     float: right;
     margin-right: 1em;
+}
+label {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: 130px;
+}
+input[type="text"], input[type="password"], input[type="email"], input[type="number"]{ 
+
+    padding: 4px;
+    width: 240px;
+    margin-bottom: 20px;
+}
+#alert{
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #e6c0c0;
+    height: 0;
+    color: #c00;
+    font: 20px/40px arial, sans-serif;
+    opacity: .8;
 }

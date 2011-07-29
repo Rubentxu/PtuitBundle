@@ -1,0 +1,8 @@
+{# Este es la respuesta Ajax al mandar el Mensaje/Ptuit #}
+{{ { 'avatar': asset('bundles/ptuit/imagenes/ptuit.png'),
+ 'texto': mensaje.texto,
+'creado': mensaje.creado|date('d-m-Y'),
+'nick': mensaje.usuario.nick,
+'ruta_ver': path('ptuit_show', { 'id': mensaje.id })
+ }|json_encode| raw }}
+

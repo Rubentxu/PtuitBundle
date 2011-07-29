@@ -1,11 +1,15 @@
 {% extends 'PtuitBundle::plantilla.html.twig' %}
-
+{% block alertas %}
+   <div id="alert">       
+           {{ form_errors(form.texto,{ 'attr': {'class': 'error','id':'errorMensaje'} }) }}       
+   </div>
+{% endblock %}
 {% block Ptuits %}
 
 <div id="cajaMensaje">
     <form id="formMens" action="{{ path('ptuit_create') }}" method="post">
         {{ form_errors(form.texto,{ 'attr': {'class': 'error','id':'errorMensaje'} }) }}
-            <fieldset >
+            <fieldset class="mensaje">
                 <legend>Escribe tu ptuit</legend>
 
 
@@ -22,7 +26,7 @@
     <h1>Cronologia</h1>
     <div id="caja_men" >
         <ul class="statuses">
-
+            <li></li>
     {% for mensaje in mensajes %}
             <li>
                 <a href="#"><img class="avatar" src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}"  alt="avatar" /></a>

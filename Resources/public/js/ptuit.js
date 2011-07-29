@@ -2,17 +2,33 @@ $(document).ready(function(){
     $(".txtMen").cuentaCaracteres();
     $("#botonTxt").click(enviarMensaje);
     $("#btnRegistrar").click(registrar);
-    $("#btnLogin").click(login);
-    $('#panel').hide();
-    $('#panel2').hide();
-    $("#login").click(toggleLogin);
-    $("#registro").click(toggleRegistro);
-    $("#mar").marquee({
-        yScroll: "bottom"
-    });
+    $("#btnLogin").click(login);   
+    $('#alert').alertas();
+    
 
 
 })
+jQuery.fn.alertas= function(){
+    var alertas = $(this);
+    
+    if(($(this).text()).trim().length>0)
+    {
+        var alerttimer = window.setTimeout(function () {
+            alertas.trigger('click');
+        }, 3000);
+        alertas.animate({
+            height: alertas.css('line-height') || '50px'
+            }, 200)
+        .click(function () {
+            window.clearTimeout(alerttimer);
+            alertas.animate({
+                height: '0'
+            }, 200);
+        });
+    }
+	
+    
+}
 function toggleLogin()
 {
     $('#panel2').hide();
@@ -164,7 +180,7 @@ function enviarMensaje(){
         url:url,
         async: true,
         type: "POST",
-        dataType: "html",
+        dataType: "json",
         contentType: "application/x-www-form-urlencoded",
         data:"texto="+texto+"&Mensaje[_token]="+token,
         beforeSend: inicioEnvio,    
@@ -184,13 +200,19 @@ function inicioEnvio (datos){
 }
 function llegadaDatos (datos){
     
-    alert('los datos son: '+datos);
-           
-    $('ul.statuses li:first-child').before(datos);
-    $("ul.statuses:empty").append(datos);
-    $('#lastTweet').html($('#inputField').val());
-    $('#inputField').val('');
-        
+    //alert('los datos son: '+datos);
+    if(datos.texto){  
+        var ptuit='<li><a href="#"><img class="avatar" src="'+datos.avatar+'"alt="avatar"/></a>'+
+                '<div class="tweetTxt"><strong><a href="#">'+datos.nick+'</a>: </strong>'+
+                datos.texto+'<div class="date">'+datos.creado+'</div>'+
+                '<div class="flotarDer"><a href="'+datos.ruta_ver+'">ver</a></div>'+
+                '</div><div class="clear"></div></li>';
+            
+        $('ul.statuses li:first-child').before(ptuit);
+        $("ul.statuses:empty").append(ptuit);
+        $('#lastTweet').html($('#inputField').val());
+        $('#inputField').val('');
+    }   
     
     $(".txtMen").removeClass("txtMenCargando");
 }

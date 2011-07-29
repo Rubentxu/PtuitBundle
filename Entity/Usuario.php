@@ -5,6 +5,7 @@ namespace amiguetes\PtuitBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * amiguetes\PtuitBundle\Entity\Usuario
@@ -26,24 +27,44 @@ class Usuario implements UserInterface, \Serializable {
      * @var string $nick
      *
      * @ORM\Column(name="nick", type="string", length=20, nullable=true)
+     * @Assert\NotBlank( message = "Por favor, escriba su nick",groups={"registro"})
+     * @Assert\MinLength(limit=2 , message = "Por favor, escriba al menos 2 caracteres",
+     * groups={"registro"})
+     * @Assert\MaxLength(limit=14, message = "Por favor,no exceda de los 14 caracteres",
+     * groups={"registro"})
      */
     private $nick;
     /**
      * @var string $nombre
      *
      * @ORM\Column(name="nombre", type="string", length=50, nullable=true)
+     * @Assert\NotBlank( message = "Por favor, escriba su nombre completo",
+     * groups={"registro"})
+     * @Assert\MinLength(limit=6 , message = "Por favor, escriba al menos 6 caracteres",
+     * groups={"registro"})
+     * @Assert\MaxLength(limit=30, message = "Por favor,no exceda de los 30 caracteres",
+     * groups={"registro"})
      */
     private $nombre;
     /**
      * @var string $pass
      *
      * @ORM\Column(name="pass", type="string", length=160, nullable=true)
+     * @Assert\NotBlank( message = "Por favor, no deje vacio el password",
+     * groups={"registro"})
+     * @Assert\MinLength(limit=6 , message = "Por favor, escriba al menos 6 caracteres",
+     * groups={"registro"})
+     * @Assert\MaxLength(limit=15, message = "Por favor,no exceda de los 15 caracteres",
+     * groups={"registro"})
+     * 
      */
     private $pass;
     /**
      * @var string $email
      *
      * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     * @Assert\NotBlank(message = "Por favor no deje vacio el email",groups={"registro"})
+     * @Assert\Email(message = "Por favor, introduzca un email valido",groups={"registro"})
      */
     private $email;
     /**

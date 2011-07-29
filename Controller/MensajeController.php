@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use amiguetes\PtuitBundle\Entity\Mensaje;
 use amiguetes\PtuitBundle\Form\MensajeType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\ConstraintViolation;
 
 /**
  * Mensaje controller.
@@ -75,19 +76,21 @@ class MensajeController extends Controller {
      *
      * @Route("/create", name="ptuit_create")
      * @Method("post")
-     * @Template("PtuitBundle:Ajax:respuestaMensaje.html.twig")
+     * @Template("PtuitBundle:Ajax:respuestaMensaje.json.twig")
      */
     public function createAction() {
 
         $usuario = $this->get('security.context')->getToken()->getUser();
         $mensaje = new Mensaje();
-        $request = $this->getRequest();        
+        $request = $this->getRequest();
         $mensaje->setTexto($request->get('texto'));
         $mensaje->setUsuario($usuario);
         $mensaje->setCreado(new \DateTime());
+        $mensaje->setModificado(new \DateTime());
 
         $validador = $this->get('validator');
         $listaErrores = $validador->validate($mensaje);
+
 
 
 
@@ -96,17 +99,20 @@ class MensajeController extends Controller {
 
         if ('POST' === $request->getMethod()) {
 
-            if (count($listaErrores) > 0) {            
-                
-                return array('listaErrores'=>$listaErrores);
-                
+            if (count($listaErrores) > 0) {
+                $res = array();
+                foreach ($listaErrores as  $value) {
+                    $res[] = $value->getMessage();
+                }
+                $response = new Response(json_encode($res));
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
             } else {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($mensaje);
                 $em->flush();
-
-                return array('mensaje'=> $mensaje,
-                    'listaErrores'=>'');
+                
+                return array('mensaje'=>$mensaje);
             }
         }
     }
