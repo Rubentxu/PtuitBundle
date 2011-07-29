@@ -212,6 +212,9 @@ function llegadaDatos (datos){
         $("ul.statuses:empty").append(ptuit);
         $('#lastTweet').html($('#inputField').val());
         $('#inputField').val('');
+    }else{
+        $('#alert').html(datos[0]).alertas();
+            
     }   
     
     $(".txtMen").removeClass("txtMenCargando");
