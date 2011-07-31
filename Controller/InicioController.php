@@ -22,8 +22,6 @@ class InicioController extends Controller {
         $mensajes = $em->getRepository('PtuitBundle:Mensaje')
                 ->findCronologia($id);        
 
-
-
         return $this->render('PtuitBundle:Inicio:index.html.twig', array('mensajes' => $mensajes,
             'usuario' => $usuario,
             'form' => $formulario->createView()));

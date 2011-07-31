@@ -26,7 +26,7 @@ class Usuario implements UserInterface, \Serializable {
     /**
      * @var string $nick
      *
-     * @ORM\Column(name="nick", type="string", length=20, nullable=true)
+     * @ORM\Column(name="nick", type="string", length=20, nullable=false)
      * @Assert\NotBlank( message = "Por favor, escriba su nick",groups={"registro"})
      * @Assert\MinLength(limit=2 , message = "Por favor, escriba al menos 2 caracteres",
      * groups={"registro"})
@@ -35,21 +35,9 @@ class Usuario implements UserInterface, \Serializable {
      */
     private $nick;
     /**
-     * @var string $nombre
-     *
-     * @ORM\Column(name="nombre", type="string", length=50, nullable=true)
-     * @Assert\NotBlank( message = "Por favor, escriba su nombre completo",
-     * groups={"registro"})
-     * @Assert\MinLength(limit=6 , message = "Por favor, escriba al menos 6 caracteres",
-     * groups={"registro"})
-     * @Assert\MaxLength(limit=30, message = "Por favor,no exceda de los 30 caracteres",
-     * groups={"registro"})
-     */
-    private $nombre;
-    /**
      * @var string $pass
      *
-     * @ORM\Column(name="pass", type="string", length=160, nullable=true)
+     * @ORM\Column(name="pass", type="string", length=160, nullable=false)
      * @Assert\NotBlank( message = "Por favor, no deje vacio el password",
      * groups={"registro"})
      * @Assert\MinLength(limit=6 , message = "Por favor, escriba al menos 6 caracteres",
@@ -62,59 +50,27 @@ class Usuario implements UserInterface, \Serializable {
     /**
      * @var string $email
      *
-     * @ORM\Column(name="email", type="string", length=100, nullable=true)
+     * @ORM\Column(name="email", type="string", length=100, nullable=false)
      * @Assert\NotBlank(message = "Por favor no deje vacio el email",groups={"registro"})
      * @Assert\Email(message = "Por favor, introduzca un email valido",groups={"registro"})
      */
     private $email;
     /**
-     * @var string $telefono
-     *
-     * @ORM\Column(name="telefono", type="string", length=20, nullable=true)
+     * @ORM\OneToOne(targetEntity="Perfil", mappedBy="usuario", cascade={"persist", "remove"}) 
+     * @ORM\JoinColumn(name="perfil_id", referencedColumnName="id") 
      */
-    private $telefono;
+    private $perfil;
     /**
-     * @var integer $edad
-     *
-     * @ORM\Column(name="edad", type="integer", nullable=true)
-     */
-    private $edad;
-    /**
-     * @var text $intereses
-     *
-     * @ORM\Column(name="intereses", type="text", nullable=true)
-     */
-    private $intereses;
-    /**
-     * @var text $biografia
-     *
-     * @ORM\Column(name="biografia", type="text", nullable=true)
-     */
-    private $biografia;
-    /**
-     * @var string $localizacion
-     *
-     * @ORM\Column(name="localizacion", type="string", length=200, nullable=true)
-     */
-    private $localizacion;
-    /**
-     * @var string $web
-     *
-     * @ORM\Column(name="web", type="string", length=200, nullable=true)
-     */
-    private $web;
-    /**
-     * @var string $avatar
-     *
-     * @ORM\Column(name="avatar", type="string", length=20, nullable=true)
+     * @ORM\OneToOne(targetEntity="Avatar", mappedBy="usuario", cascade={"persist", "remove"}) 
+     * @ORM\JoinColumn(name="avatar_id", referencedColumnName="id") 
      */
     private $avatar;
     /**
      * @var Mensaje
      *
-     * @ORM\ManyToMany(targetEntity="Mensaje", mappedBy="usuarioid")
+     * @ORM\ManyToMany(targetEntity="Mensaje", mappedBy="$usuarioDeFavoritos")
      */
-    private $mensajeid;
+    private $mensajesFavoritos;
     /**
      * @ORM\ManyToMany(targetEntity="Usuario", mappedBy="Seguidos")
      */
@@ -139,59 +95,55 @@ class Usuario implements UserInterface, \Serializable {
      * @ORM\ManyToMany(targetEntity="Mensaje", mappedBy="replicadoPorUsuario")
      */
     private $mensajesReplicados;
+    /**
+     * @ORM\ManyToMany(targetEntity="Grupo", inversedBy="usuarios")
+     * @ORM\JoinTable(name="Usuario_Grupo",
+     *      joinColumns={@ORM\JoinColumn(name="usuario_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="grupo_id", referencedColumnName="id")}
+     *      )
+     */
+    private $grupos;
+    /**
+     * @ORM\ManyToMany(targetEntity="Grupo", inversedBy="administradores")
+     * @ORM\JoinTable(name="Administrador_Grupo",
+     *      joinColumns={@ORM\JoinColumn(name="admin_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="grupo_id", referencedColumnName="id")}
+     *      )
+     */
+    private $gruposAdministrados;
+
+
+
 
     function getRoles() {
         return array('ROLE_USER');
     }
 
-    /**
-     * Returns the salt.
-     *
-     * @return string The salt
-     */
     function getSalt() {
         return FALSE;
     }
 
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
     function getUsername() {
         return $this->email;
     }
 
-    /**
-     * Removes sensitive data from the user.
-     *
-     * @return void
-     */
     function eraseCredentials() {
         return FALSE;
     }
 
-    /**
-     * The equality comparison should neither be done by referential equality
-     * nor by comparing identities (i.e. getId() === getId()).
-     *
-     * However, you do not need to compare every attribute, but only those that
-     * are relevant for assessing whether re-authentication is required.
-     *
-     * @param UserInterface $user
-     * @return Boolean
-     */
     function equals(UserInterface $user) {
         $this->getUsername() == $user->getUsername();
     }
 
     public function __construct() {
-        $this->mensajeid = new ArrayCollection();
+        $this->mensajesFavoritos = new ArrayCollection();
         $this->Seguidores = new ArrayCollection();
         $this->Seguidos = new ArrayCollection();
         $this->mensajesRecibidos = new ArrayCollection();
         $this->mensajesEnviados = new ArrayCollection();
         $this->mensajesReplicados = new ArrayCollection();
+        $this->grupos= new ArrayCollection();
+        $this->gruposAdministrados= new ArrayCollection();
     }
 
     /**
@@ -219,24 +171,6 @@ class Usuario implements UserInterface, \Serializable {
      */
     public function getNick() {
         return $this->nick;
-    }
-
-    /**
-     * Set nombre
-     *
-     * @param string $nombre
-     */
-    public function setNombre($nombre) {
-        $this->nombre = $nombre;
-    }
-
-    /**
-     * Get nombre
-     *
-     * @return string 
-     */
-    public function getNombre() {
-        return $this->nombre;
     }
 
     /**
@@ -276,114 +210,6 @@ class Usuario implements UserInterface, \Serializable {
     }
 
     /**
-     * Set telefono
-     *
-     * @param string $telefono
-     */
-    public function setTelefono($telefono) {
-        $this->telefono = $telefono;
-    }
-
-    /**
-     * Get telefono
-     *
-     * @return string 
-     */
-    public function getTelefono() {
-        return $this->telefono;
-    }
-
-    /**
-     * Set edad
-     *
-     * @param integer $edad
-     */
-    public function setEdad($edad) {
-        $this->edad = $edad;
-    }
-
-    /**
-     * Get edad
-     *
-     * @return integer 
-     */
-    public function getEdad() {
-        return $this->edad;
-    }
-
-    /**
-     * Set intereses
-     *
-     * @param text $intereses
-     */
-    public function setIntereses($intereses) {
-        $this->intereses = $intereses;
-    }
-
-    /**
-     * Get intereses
-     *
-     * @return text 
-     */
-    public function getIntereses() {
-        return $this->intereses;
-    }
-
-    /**
-     * Set biografia
-     *
-     * @param text $biografia
-     */
-    public function setBiografia($biografia) {
-        $this->biografia = $biografia;
-    }
-
-    /**
-     * Get biografia
-     *
-     * @return text 
-     */
-    public function getBiografia() {
-        return $this->biografia;
-    }
-
-    /**
-     * Set localizacion
-     *
-     * @param string $localizacion
-     */
-    public function setLocalizacion($localizacion) {
-        $this->localizacion = $localizacion;
-    }
-
-    /**
-     * Get localizacion
-     *
-     * @return string 
-     */
-    public function getLocalizacion() {
-        return $this->localizacion;
-    }
-
-    /**
-     * Set web
-     *
-     * @param string $web
-     */
-    public function setWeb($web) {
-        $this->web = $web;
-    }
-
-    /**
-     * Get web
-     *
-     * @return string 
-     */
-    public function getWeb() {
-        return $this->web;
-    }
-
-    /**
      * Set avatar
      *
      * @param string $avatar
@@ -406,8 +232,8 @@ class Usuario implements UserInterface, \Serializable {
      *
      * @param amiguetes\PtuitBundle\Entity\Mensaje $mensajeid
      */
-    public function addMensajeid(\amiguetes\PtuitBundle\Entity\Mensaje $mensajeid) {
-        $this->mensajeid[] = $mensajeid;
+    public function addMensajesFavoritos(\amiguetes\PtuitBundle\Entity\Mensaje $mensaje) {
+        $this->mensajesFavoritos = $mensaje;
     }
 
     /**
@@ -415,8 +241,8 @@ class Usuario implements UserInterface, \Serializable {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getMensajeid() {
-        return $this->mensajeid;
+    public function getMensajesFavoritos() {
+        return $this->mensajesFavoritos;
     }
 
     /**
@@ -500,6 +326,14 @@ class Usuario implements UserInterface, \Serializable {
         $this->mensajesReplicados[] = $mensajesReplicados;
     }
 
+    public function getPerfil() {
+        $this->perfil;
+    }
+
+    public function setPerfil($perfil) {
+        $this->perfil = $perfil;
+    }
+
     /**
      * Get mensajesReplicados
      *
@@ -513,16 +347,10 @@ class Usuario implements UserInterface, \Serializable {
         return serialize(array(
             'id' => $this->getId(),
             'nick' => $this->getNick(),
-            'nombre' => $this->getNombre(),
             'email' => $this->getEmail(),
             'pass' => $this->getPassword(),
-            'telefono' => $this->getTelefono(),
-            'edad' => $this->getEdad(),
-            'intereses' => $this->getIntereses(),
-            'biografia' => $this->getBiografia(),
-            'localizacion' => $this->getLocalizacion(),
-            'web' => $this->getWeb(),
-            'avatar' => $this->getAvatar(),
+            'perfil' => NULL,
+            'avatar' => NULL,
             'Seguidores' => $this->getSeguidores(),
             'Seguidos' => $this->getSeguidos()
         ));
@@ -532,20 +360,72 @@ class Usuario implements UserInterface, \Serializable {
         $serialized = unserialize($strSerialized);
 
 
-        $this->id=$serialized['id'];
-        $this->nick=$serialized['nick'];
-        $this->nombre=$serialized['nombre'];
-        $this->email=$serialized['email'];
-        $this->pass=$serialized['pass'];
-        $this->telefono=$serialized['telefono'];
-        $this->edad=$serialized['edad'];
-        $this->intereses=$serialized['intereses'];
-        $this->biografia=$serialized['biografia'];
-        $this->localizacion=$serialized['localizacion'];
-        $this->web=$serialized['web'];
-        $this->avatar=$serialized['avatar'];
-        $this->Seguidores=$serialized['Seguidores'];
-        $this->Seguidos=$serialized['Seguidos'];
+        $this->id = $serialized['id'];
+        $this->nick = $serialized['nick'];
+        $this->email = $serialized['email'];
+        $this->pass = $serialized['pass'];
+        $this->perfil = $serialized['perfil'];
+        $this->avatar = $serialized['avatar'];
+        $this->Seguidores = $serialized['Seguidores'];
+        $this->Seguidos = $serialized['Seguidos'];
     }
 
+    /**
+     * Set pass
+     *
+     * @param string $pass
+     */
+    public function setPass($pass) {
+        $this->pass = $pass;
+    }
+
+    /**
+     * Get pass
+     *
+     * @return string 
+     */
+    public function getPass() {
+        return $this->pass;
+    }
+
+
+    /**
+     * Add grupos
+     *
+     * @param amiguetes\PtuitBundle\Entity\Grupo $grupos
+     */
+    public function addGrupos(\amiguetes\PtuitBundle\Entity\Grupo $grupos)
+    {
+        $this->grupos[] = $grupos;
+    }
+
+    /**
+     * Get grupos
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getGrupos()
+    {
+        return $this->grupos;
+    }
+
+    /**
+     * Add gruposAdministrados
+     *
+     * @param amiguetes\PtuitBundle\Entity\Grupo $gruposAdministrados
+     */
+    public function addGruposAdministrados(\amiguetes\PtuitBundle\Entity\Grupo $gruposAdministrados)
+    {
+        $this->gruposAdministrados[] = $gruposAdministrados;
+    }
+
+    /**
+     * Get gruposAdministrados
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getGruposAdministrados()
+    {
+        return $this->gruposAdministrados;
+    }
 }

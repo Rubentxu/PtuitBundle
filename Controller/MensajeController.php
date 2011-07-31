@@ -44,7 +44,7 @@ class MensajeController extends Controller {
         $entity = $em->getRepository('PtuitBundle:Mensaje')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Mensaje entity.');
+            throw $this->createNotFoundException('Incapaz de encontrar entidad Mensaje.');
         }
 
         $deleteForm = $this->createDeleteForm($id);

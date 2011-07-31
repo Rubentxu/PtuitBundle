@@ -7,3 +7,6 @@ $dql = "SELECT  m  FROM PtuitBundle:Mensaje  m, PtuitBundle:Usuario u
             OR m.usuario=1 
             GROUP BY m.texto 
             ORDER BY m.creado DESC";
+
+
+Apunte:La consulta no funciona si la tabla amigos esta vacia.

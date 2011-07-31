@@ -26,20 +26,24 @@
     <h1>Cronologia</h1>
     <div id="caja_men" >
         <ul class="statuses">
-            <li></li>
+            
     {% for mensaje in mensajes %}
             <li>
                 <a href="#"><img class="avatar" src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}"  alt="avatar" /></a>
                 <div class="tweetTxt"><strong><a href="#"> {{ mensaje.usuario.nick}}</a>: </strong>
                         {{ mensaje.texto }}
                         <div class="date">{{ mensaje.creado|date('d-m-Y') }}</div>
-                        <div class="flotarDer"> <a href="{{ path('ptuit_show', { 'id': mensaje.id }) }}">show</a></div>
+                        <div class="flotarDer"> <a class="verMens" href="{{ path('ptuit_show', { 'id': mensaje.id }) }}">ver</a></div>
                     </div>
 
                     <div class="clear"></div>
-
+                </li>
+    {% else %}
+                <li><a href="#"><img class="avatar" src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}"  alt="avatar" /></a>
+                    Escribe tu Ptuit y se mostrara aqui, los tuyos y los de tus amigos.
                 </li>
     {% endfor %}
+                
             </ul>        
         </div>
 
@@ -63,15 +67,15 @@
                     <div class="bloqueContenido-cr"></div>
                     <div class="bloqueContenido-cc"></div>
                     <div class="bloqueContenido-body">
-                        <p>{{usuario.nombre}}</p>
+                        <p>{{usuario.nick}}</p>
                         <p>{{usuario.email}}</p>
                         <h3>Seguidores: {{ usuario.Seguidores |length}}</h3>
                         {% for seguidor in usuario.Seguidores %}
-                        <p>{{seguidor.nombre}}</p>
+                        <p>{{seguidor.nick}}</p>
                         {% endfor %}
                          <h3>Seguidos: {{ usuario.Seguidos |length}}</h3>
                         {% for seguido in usuario.Seguidos %}
-                        <p>{{seguido.nombre}}</p>
+                        <p>{{seguido.nick}}</p>
                         {% endfor %}
                         <div class="cleared"></div>
                     </div>

@@ -1,74 +1,81 @@
 {% extends 'PtuitBundle::plantilla.html.twig' %}
 
 {% block alertas %}
-   <div id="alert" >
+<div id="alert" >
        {% if error %}
           {{ error.message }}
-       {% endif %} 
-   </div>
+       {% endif %}
+        {% if app.session.hasFlash('notice') %}            
+                    {{ app.session.flash('notice') }}                
+        {% endif %}
+    </div>
 {% endblock %}
 {% block barraNavegacion %}
-<div class="Bnavegacion">
-    <div class="l">
-</div>
-    <div class="r"></div>
-
-</div>
+    <div class="Bnavegacion">
+        <div class="l">
+        {% if app.session.hasFlash('notice') %}
+                <h3 style="color: #ffffff;padding-left: 1em;">
+                 {{ app.session.flash('notice') }}
+                    </h3>                
+        {% endif %}
+                </div>
+                <div class="r"></div>
+            </div>
 {% endblock %}
 {% block contenido %}
 
-<div class="bloqueCabecera">
-    <div class="l"></div>
-    <div class="r"></div>
-    <h3 class="t">Entrar a Ptuit</h3>
-</div>
-<div class="bloqueContenido">
-    <div class="bloqueContenido-tl"></div>
-    <div class="bloqueContenido-tr"></div>
-    <div class="bloqueContenido-bl"></div>
-    <div class="bloqueContenido-br"></div>
-    <div class="bloqueContenido-tc"></div>
-    <div class="bloqueContenido-bc"></div>
-    <div class="bloqueContenido-cl"></div>
-    <div class="bloqueContenido-cr"></div>
-    <div class="bloqueContenido-cc"></div>
-    <div class="bloqueContenido-body">
-        <form action="{{ path('login_check') }}" method="post" name="login_check"  >
-            <fieldset >
-                <p >
-                    <label for="modlgn_username">Email</label><br />
-                    <input id="modlgn_username" type="text" name="_username" 
-                           class="inputbox" alt="username" size="18" value="{{ last_username }}" />
-                </p>
-                <p >
-                    <label for="modlgn_passwd">Password</label><br />
-                    <input id="modlgn_passwd" type="password" name="_password" 
-                           class="inputbox" size="18" alt="password" />
-                </p>
-                <p >
-                    <label for="modlgn_remember">Recordar</label>
-                    <input id="modlgn_remember" type="checkbox" name="remember" 
-                           class="inputbox" value="yes" alt="Remember Me" />
-                </p>
-                <span class="art-button-wrapper">
-                    <span class="art-button-l"> </span>
-                    <span class="art-button-r"> </span>
-                    <input type="submit" name="Submit" class="art-button" value="Login" />
-                </span>
+            <div class="bloqueCabecera">
+                <div class="l"></div>
+                <div class="r"></div>
+                <h3 class="t">Entrar a Ptuit</h3>
+            </div>
+            <div class="bloqueContenido">
+                <div class="bloqueContenido-tl"></div>
+                <div class="bloqueContenido-tr"></div>
+                <div class="bloqueContenido-bl"></div>
+                <div class="bloqueContenido-br"></div>
+                <div class="bloqueContenido-tc"></div>
+                <div class="bloqueContenido-bc"></div>
+                <div class="bloqueContenido-cl"></div>
+                <div class="bloqueContenido-cr"></div>
+                <div class="bloqueContenido-cc"></div>
+                <div class="bloqueContenido-body">
+                    <form action="{{ path('login_check') }}" method="post" name="login_check"  >
+                        <fieldset >
+                            <p >
+                                <label for="modlgn_username">Email</label><br />
+                                <input id="modlgn_username" type="text" name="_username" 
+                                       class="inputbox" alt="username" size="18" value="{{ last_username }}" />
+                            </p>
+                            <p >
+                                <label for="modlgn_passwd">Password</label><br />
+                                <input id="modlgn_passwd" type="password" name="_password" 
+                                       class="inputbox" size="18" alt="password" />
+                            </p>
+                            <p >
+                                <label for="modlgn_remember">Recordar</label>
+                                <input id="modlgn_remember" type="checkbox" name="remember" 
+                                       class="inputbox" value="yes" alt="Remember Me" />
+                            </p>
+                            <span class="art-button-wrapper">
+                                <span class="art-button-l"> </span>
+                                <span class="art-button-r"> </span>
+                                <input type="submit" name="Submit" class="art-button" value="Login" />
+                            </span>
                 {% if error %}
-                    <div class="error">{{ error.message }}</div>
+                            <div class="error">{{ error.message }}</div>
                 {% endif %} 
-            </fieldset>
-            <p>Para ver una demostracion de la aplicacion entrar con Usuario: demo1234@ptuit.com y Password: demo1234</p>
-            <ul>
-                <li><a href="#">Perdiste tu password?</a></li>                
-                <li><a href="{{path('registro')}}">Registrarse</a></li>
-            </ul>
-        </form>
+                        </fieldset>
+                        <p>Para ver una demostracion de la aplicacion entrar con Usuario: demo1234@ptuit.com y Password: demo1234</p>
+                        <ul>
+                            <li><a href="#">Perdiste tu password?</a></li>                
+                            <li><a href="{{path('registro')}}">Registrarse</a></li>
+                        </ul>
+                    </form>
 
-        <div class="cleared"></div>
-    </div>
-</div>
+                    <div class="cleared"></div>
+                </div>
+            </div>
 
 
 {% endblock %}

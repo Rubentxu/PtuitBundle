@@ -7,6 +7,8 @@ use Symfony\Component\Security\Core\SecurityContext;
 use amiguetes\PtuitBundle\Form\UsuarioType;
 use amiguetes\PtuitBundle\Entity\Usuario;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use amiguetes\PtuitBundle\Entity\Perfil;
+use amiguetes\PtuitBundle\Entity\Avatar;
 
 class SecurityController extends Controller {
 
@@ -21,10 +23,17 @@ class SecurityController extends Controller {
     }
 
     public function registroAction() {
+        
         $usuario=new Usuario();
+        $perfil= new Perfil();
+        $perfil->setPrivacidad(1);
+        $usuario->setPerfil($perfil);
+        $avatar=new Avatar();
+        $avatar->setCreado(new \DateTime());        
+        $usuario->setAvatar($avatar);
+        
         $form = $this->get('form.factory')->create(new UsuarioType(),$usuario, 
-                array('validation_groups' => array('registro'),
-                    'data_class' => 'amiguetes\PtuitBundle\Entity\Usuario'));
+                array('data_class' => 'amiguetes\PtuitBundle\Entity\Usuario'));
         $request = $this->get('request');
 
         if ($request->getMethod() == 'POST') {
@@ -44,7 +53,7 @@ class SecurityController extends Controller {
                 $usuario->setPassword($password);
 
                 // Guardamos el objeto en base de datos
-                $em = $this->get('doctrine')->getEntityManager();
+                $em = $this->get('doctrine')->getEntityManager();                
                 $em->persist($usuario);
                 $em->flush();
 

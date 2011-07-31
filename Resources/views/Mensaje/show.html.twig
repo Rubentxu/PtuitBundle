@@ -1,6 +1,3 @@
-{% extends 'PtuitBundle::plantilla.html.twig' %}
-
-{% block Ptuits %}
 <h1>Mensaje</h1>
 
 <table class="record_properties">
@@ -8,7 +5,7 @@
         <tr>
             <th>Id</th>                <td>{{ entity.id }}</td>        </tr>
         <tr>
-            <th>Nombreusuario</th>                <td>{{ entity.nombreusuario }}</td>        </tr>
+            <th>Nick</th>                <td>{{ entity.usuario.nick }}</td>        </tr>
         <tr>
             <th>Creado</th>                <td>{{ entity.creado|date('Y-m-d H:i:s') }}</td>        </tr>
         <tr>
@@ -36,4 +33,3 @@
             </form>
         </li>
     </ul>
-{% endblock %}

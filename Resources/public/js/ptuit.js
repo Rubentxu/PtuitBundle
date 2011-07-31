@@ -2,7 +2,7 @@ $(document).ready(function(){
     $(".txtMen").cuentaCaracteres();
     $("#botonTxt").click(enviarMensaje);
     $("#btnRegistrar").click(registrar);
-    $("#btnLogin").click(login);   
+    $(".verMens").click(verMens);   
     $('#alert').alertas();
     
 
@@ -43,20 +43,20 @@ function toggleRegistro()
     return false;
 }
 
-function login(){
-    var usuario=$("#nick").attr("value");
-    var pass=$("#pass").attr("value");
-
+function verMens(evento){   
+    
+    evento.preventDefault();
+    var ruta=$(this).attr("href");  
+    
     $.ajax({
-        url:"index.php",
+        url:ruta,
         async: true,
         type: "POST",
-        dataType: "json",
+        dataType: "html",
         contentType: "application/x-www-form-urlencoded",
-        data:"controlador=usuario&accion=login&formulario=Login&usuario="+usuario+"&pass="+pass,
-        beforeSend: inicioLogin,
-        success:llegadaDatosLogin,
-        complete: completadoLogin,
+        beforeSend: inicioVerMens,
+        success:llegadaDatosVerMens,
+        complete: completadoVerMens,
         timeout: 4000,
         error: problemasEnvio
 
@@ -65,38 +65,20 @@ function login(){
 
 }
 
-function inicioLogin (datos){
+function inicioVerMens (datos){
 
-    $("#panel").addClass("txtMenCargando");
-
-
-}
-function llegadaDatosLogin(datos){
-
-    if(datos.validado=='FALSE'){
-        var errorMensaje =$('#errorFormLogin');
-        errorMensaje.text(datos.msgError);
-        errorMensaje.show('slow');
-
-    }else {
-        $('#login').hide();
-        $('#registro').hide();
-        $('#logExito').text("Bienvenido: "+datos.datosUsuario.usuario);
-        $('#logExito').show("slow");
-
-        $('#panel').hide();
-        $('#panel2').hide();
-    }
-    $("#panel").removeClass("txtMenCargando");
-    $("#pass").val("")
-    $("#nick").val("");
-
-    
-    
-
+    $(".bloqueCabecera").addClass("txtMenCargando");
+    $('.bloqueContenido-body').hide("fast");
+    $('.bloqueContenido-body').text('');
 
 }
-function completadoLogin()   {
+function llegadaDatosVerMens(datos){
+    
+    $('.bloqueContenido-body').html(datos); 
+    $('.bloqueContenido-body').show("slow");
+
+}
+function completadoVerMens()   {
     
 }
 
@@ -213,10 +195,8 @@ function llegadaDatos (datos){
         $('#lastTweet').html($('#inputField').val());
         $('#inputField').val('');
     }else{
-        $('#alert').html(datos[0]).alertas();
-            
-    }   
-    
+        $('#alert').html(datos[0]).alertas();            
+    }       
     $(".txtMen").removeClass("txtMenCargando");
 }
 function problemasEnvio(objeto, quepaso, otroobj){

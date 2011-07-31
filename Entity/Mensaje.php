@@ -56,13 +56,13 @@ class Mensaje {
     /**
      * @var Usuario
      *
-     * @ORM\ManyToMany(targetEntity="Usuario", inversedBy="mensajeid")
+     * @ORM\ManyToMany(targetEntity="Usuario", inversedBy="mensajesFavoritos")
      * @ORM\JoinTable(name="Mensaje_favorito",
      *   joinColumns={@ORM\JoinColumn(name="mensajeId", referencedColumnName="id")},
      *  inverseJoinColumns={@ORM\JoinColumn(name="usuarioId", referencedColumnName="id")
      *   })
      */
-    private $usuarioid;
+    private $usuarioDeFavoritos;
     /**
      * @var Tag
      *
@@ -76,8 +76,7 @@ class Mensaje {
     /**
      * @var Usuario
      *
-     * @ORM\ManyToOne(targetEntity="Usuario")
-     * @ORM\JoinColumns({
+     * @ORM\ManyToOne(targetEntity="Usuario")     
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")})
      * @Assert\NotNull
      */
@@ -86,9 +85,10 @@ class Mensaje {
 
 
     public function __construct() {
-        $this->usuarioid = new ArrayCollection();
+        $this->usuario = new ArrayCollection();
         $this->tagid = new ArrayCollection();
-        $this->replicadoPorUsuario = new ArrayCollection();        
+        $this->replicadoPorUsuario = new ArrayCollection();
+        $this->usuarioDeFavoritos= new ArrayCollection();
     }
 
     
@@ -190,9 +190,9 @@ class Mensaje {
      *
      * @param amiguetes\PtuitBundle\Entity\Usuario $usuarioid
      */
-    public function addUsuarioid(\amiguetes\PtuitBundle\Entity\Usuario $usuarioid)
+    public function addUsuarioDeFavoritos(\amiguetes\PtuitBundle\Entity\Usuario $usuario)
     {
-        $this->usuarioid[] = $usuarioid;
+        $this->usuarioDeFavoritos[] = $usuario;
     }
 
     /**
@@ -200,9 +200,9 @@ class Mensaje {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getUsuarioid()
+    public function getUsuarioDeFavoritos()
     {
-        return $this->usuarioid;
+        return $this->usuarioDeFavoritos;
     }
 
     /**
