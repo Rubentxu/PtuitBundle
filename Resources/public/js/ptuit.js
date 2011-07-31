@@ -2,7 +2,7 @@ $(document).ready(function(){
     $(".txtMen").cuentaCaracteres();
     $("#botonTxt").click(enviarMensaje);
     $("#btnRegistrar").click(registrar);
-    $(".verMens").click(verMens);   
+    $('.verMens').live('click', verMens);   
     $('#alert').alertas();
     
 
@@ -29,19 +29,6 @@ jQuery.fn.alertas= function(){
 	
     
 }
-function toggleLogin()
-{
-    $('#panel2').hide();
-    $('#panel').toggle("slow");
-    $('#errorFormLogin').text('');
-    return false;
-}
-function toggleRegistro()
-{
-    $('#panel').hide();
-    $('#panel2').toggle("slow");
-    return false;
-}
 
 function verMens(evento){   
     
@@ -51,9 +38,8 @@ function verMens(evento){
     $.ajax({
         url:ruta,
         async: true,
-        type: "POST",
-        dataType: "html",
-        contentType: "application/x-www-form-urlencoded",
+        type: "GET",
+        dataType: "html",        
         beforeSend: inicioVerMens,
         success:llegadaDatosVerMens,
         complete: completadoVerMens,
@@ -61,21 +47,22 @@ function verMens(evento){
         error: problemasEnvio
 
     });
-
-
 }
 
 function inicioVerMens (datos){
-
-    $(".bloqueCabecera").addClass("txtMenCargando");
-    $('.bloqueContenido-body').hide("fast");
-    $('.bloqueContenido-body').text('');
+    
+    $(".bloqueContenido-body").addClass("txtMenCargando");   
+    
 
 }
 function llegadaDatosVerMens(datos){
-    
+    $(".bloqueContenido-body").removeClass("txtMenCargando");
+    $('.bloqueContenido-body').fadeOut(500,function(){    
     $('.bloqueContenido-body').html(datos); 
-    $('.bloqueContenido-body').show("slow");
+    $('.bloqueContenido-body').fadeIn(1000);});
+    
+    
+    
 
 }
 function completadoVerMens()   {
@@ -180,14 +167,13 @@ function inicioEnvio (datos){
     $(".txtMen").addClass("txtMenCargando");
 
 }
-function llegadaDatos (datos){
+function llegadaDatos (datos){   
     
-    //alert('los datos son: '+datos);
     if(datos.texto){  
         var ptuit='<li><a href="#"><img class="avatar" src="'+datos.avatar+'"alt="avatar"/></a>'+
                 '<div class="tweetTxt"><strong><a href="#">'+datos.nick+'</a>: </strong>'+
                 datos.texto+'<div class="date">'+datos.creado+'</div>'+
-                '<div class="flotarDer"><a href="'+datos.ruta_ver+'">ver</a></div>'+
+                '<div class="flotarDer"><a class="verMens" href="'+datos.ruta_ver+'">ver</a></div>'+
                 '</div><div class="clear"></div></li>';
             
         $('ul.statuses li:first-child').before(ptuit);

@@ -2106,7 +2106,7 @@ td.key
     background: #FFFFFF  url('../imagenes/logotextarea.jpg') no-repeat center  ;
 }
 .txtMenCargando{
-    background: #FFFFFF  url('../imagenes/loading.gif') no-repeat center  ;
+    background: transparent  url('../imagenes/loading.gif') no-repeat center  ;
 }
 #botonTxt{
     float: right;
