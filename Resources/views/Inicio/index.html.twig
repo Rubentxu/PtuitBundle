@@ -1,39 +1,50 @@
 {% extends 'PtuitBundle::plantilla.html.twig' %}
 {% block alertas %}
-   <div id="alert">       
+<div id="alert">       
            {{ form_errors(form.texto,{ 'attr': {'class': 'error','id':'errorMensaje'} }) }}       
-   </div>
+    </div>
 {% endblock %}
 {% block Ptuits %}
 
-<div id="cajaMensaje">
-    <form id="formMens" action="{{ path('ptuit_create') }}" method="post">
+    <div id="cajaMensaje">
+        <form id="formMens" action="{{ path('ptuit_create') }}" method="post">
         {{ form_errors(form.texto,{ 'attr': {'class': 'error','id':'errorMensaje'} }) }}
-            <fieldset class="mensaje">
-                <legend>Escribe tu ptuit</legend>
+                <fieldset class="mensaje">
+                    <legend>Escribe tu ptuit</legend>
 
 
                 {{ form_widget(form.texto,{ 'attr': {'class': 'txtMen', 'cols':'52', 'rows':'2' } }) }}       
-                <div class="contador" ></div>
-                <input id="botonTxt" title="enviar" name="ptuit" value="ptuit.." type="submit"/>
+                    <div class="contador" ></div>
+                    <input id="botonTxt" title="enviar" name="ptuit" value="ptuit.." type="submit"/>
 
-            </fieldset>
+                </fieldset>
             {{ form_rest(form) }}
-        </form>
-    </div>
-    </br>
+            </form>
+        </div>   
 
-    <h1>Cronologia</h1>
-    <div id="caja_men" >
-        <ul class="statuses">
-            
+        <h1>Cronologia</h1>
+        <div id="caja_men" >
+            <ul class="statuses">
+
     {% for mensaje in mensajes %}
-            <li>
-                <a href="#"><img class="avatar" src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}"  alt="avatar" /></a>
-                <div class="tweetTxt"><strong><a href="#"> {{ mensaje.usuario.nick}}</a>: </strong>
-                        {{ mensaje.texto }}
-                        <div class="date">{{ mensaje.creado|date('d-m-Y') }}</div>
-                        <div class="flotarDer"> <a class="verMens" href="{{ path('ptuit_show', { 'id': mensaje.id }) }}">ver</a></div>
+                <li>
+                    <div class="avatar"><a href="#"><img  src="{{ asset('bundles/ptuit/imagenes/ptuit.png') }}"alt="avatar" /></a></div>
+                    <div class="tweetTxt">
+                        <strong><a href="#">@{{ mensaje.usuario.nick}}</a>:</strong>                        
+                        <p>{{ mensaje.texto }}</p>
+                        <div class="date">{{ mensaje.creado|date('d-m-Y') }}
+                            <span class="ExtMens">{% if usuario in mensaje.usuarioDeFavoritos %}
+                                <a class="favorito" href="{{ path('ptuit_borra_favorito', { 'id': mensaje.id }) }}">
+                                    <img src="{{ asset('bundles/ptuit/imagenes/favorito.jpeg') }}"/> Eliminar favorito</a>            
+                                    {% else %}
+                                <a class="favorito" href="{{ path('ptuit_favorito', { 'id': mensaje.id }) }}">
+                                    <img src="{{ asset('bundles/ptuit/imagenes/favorito.jpeg') }}"/> Favorito</a>
+                                    {% endif %}
+                                <a href="#"><img src="{{ asset('bundles/ptuit/imagenes/reptuit.jpeg') }}"></img> Reptuit</a>
+                                <a href="#"><img src="{{ asset('bundles/ptuit/imagenes/responder.jpeg') }}"></img> Responder</a>
+                            </span>
+                            <div class="flotarDer"> <a class="verMens" href="{{ path('ptuit_show', { 'id': mensaje.id }) }}">ver</a></div> 
+                        </div>                        
                     </div>
 
                     <div class="clear"></div>
@@ -43,7 +54,7 @@
                     Escribe tu Ptuit y se mostrara aqui, los tuyos y los de tus amigos.
                 </li>
     {% endfor %}
-                
+
             </ul>        
         </div>
 
@@ -73,7 +84,7 @@
                         {% for seguidor in usuario.Seguidores %}
                         <p>{{seguidor.nick}}</p>
                         {% endfor %}
-                         <h3>Seguidos: {{ usuario.Seguidos |length}}</h3>
+                        <h3>Seguidos: {{ usuario.Seguidos |length}}</h3>
                         {% for seguido in usuario.Seguidos %}
                         <p>{{seguido.nick}}</p>
                         {% endfor %}

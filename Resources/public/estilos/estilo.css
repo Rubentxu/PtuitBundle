@@ -1881,7 +1881,7 @@ fieldset
 }
 .mensaje
 {
-    margin:  10% ;    
+    margin:  0.5em 2em ;    
 }
 
 legend
@@ -2118,12 +2118,23 @@ td.key
     float: left;
 }
 
-img.avatar{
-    float:left;
-    margin-right:10px;
+.tweetTxt{
+  display: inline-block;
+  width: 520px;
+}
+.avatar{
+    min-height: 48px;
+    min-width: 48px;
+    max-height: 50;
+    max-width: 50;    
+    margin:18px 10px;
     border:0px solid #0B3850;
+    float: left;
+    
 }
 div.date{
+    padding-left: .2em;
+    padding-top: .1em;
     line-height:18px;
     font-size:12px;
     color:#ffffff;
@@ -2173,7 +2184,7 @@ ul.statuses{
 }
 
 ul.statuses li {
-
+    
     border-bottom:1px solid #505660;
     padding:10px 0px ;
     *padding:10px 10px;
@@ -2216,4 +2227,9 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
     color: #c00;
     font: 20px/40px arial, sans-serif;
     opacity: .8;
+}
+.ExtMens a{
+    padding-left: 1em;
+    color: #08C;
+    
 }

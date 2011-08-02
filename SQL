@@ -10,3 +10,23 @@ $dql = "SELECT  m  FROM PtuitBundle:Mensaje  m, PtuitBundle:Usuario u
 
 
 Apunte:La consulta no funciona si la tabla amigos esta vacia.
+
+SELECT m0_.id AS id0, m0_.creado AS creado1, m0_.modificado AS modificado2, m0_.texto AS texto3, m0_.usuario_id AS usuario_id4, p2_.nombre, p2_.telefono
+FROM Mensaje m0_, Perfil p2_, Usuario u1_
+INNER JOIN Amigos a3_ ON u1_.id = a3_.amigo_usuario_id
+INNER JOIN Usuario u2_ ON u2_.id = a3_.usuario_id
+WHERE u2_.id =3
+AND m0_.usuario_id = u1_.id
+AND p2_.usuario_id = m0_.usuario_id
+OR m0_.usuario_id =3
+GROUP BY m0_.texto
+ORDER BY m0_.creado DESC
+
+
+$dql = "SELECT  m  FROM PtuitBundle:Mensaje  m, PtuitBundle:Usuario u 
+            JOIN u.Seguidores s 
+            WHERE s.id =1 
+            AND m.usuario=u.id 
+            OR m.usuario=1 
+            GROUP BY m.texto 
+            ORDER BY m.creado DESC";

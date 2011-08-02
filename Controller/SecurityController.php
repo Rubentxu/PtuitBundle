@@ -28,9 +28,11 @@ class SecurityController extends Controller {
         $perfil= new Perfil();
         $perfil->setPrivacidad(1);
         $usuario->setPerfil($perfil);
+        $perfil->setUsuario($usuario);
         $avatar=new Avatar();
         $avatar->setCreado(new \DateTime());        
         $usuario->setAvatar($avatar);
+        $avatar->setUsuario($usuario);
         
         $form = $this->get('form.factory')->create(new UsuarioType(),$usuario, 
                 array('data_class' => 'amiguetes\PtuitBundle\Entity\Usuario'));

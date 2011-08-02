@@ -181,6 +181,52 @@ class MensajeController extends Controller {
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
+    
+    
+     /**
+     * Edits an existing Mensaje entity.
+     *
+     * @Route("/{id}/favorito", name="ptuit_favorito")
+     * @Method("get") 
+     */
+    public function addFavoritoAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $mensaje = $em->getRepository('PtuitBundle:Mensaje')->find($id);
+
+        if (!$mensaje) {
+            throw $this->createNotFoundException('Incapaz de encontrar la entidad Mensaje.');
+        }
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $mensaje->addUsuarioDeFavoritos($usuario);       
+        
+        
+        $request = $this->getRequest();
+
+        if ('GET' === $request->getMethod()) { 
+            
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($mensaje);                
+                $em->flush();
+
+                $response = new Response(json_encode(array('TRUE')));
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
+            
+        }
+
+        $response = new Response(json_encode(array('FALSE')));
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
+    }
+     /**
+     * Edits an existing Mensaje entity.
+     *
+     * @Route("/{id}/delete/favorito", name="ptuit_borra_favorito")
+     * @Method("get") 
+     */
+    public function deleteFavoritoAction($id) {}
 
     /**
      * Deletes a Mensaje entity.

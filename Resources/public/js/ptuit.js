@@ -4,10 +4,38 @@ $(document).ready(function(){
     $("#btnRegistrar").click(registrar);
     $('.verMens').live('click', verMens);   
     $('#alert').alertas();
+    $('.favorito').click(gestionFavoritos);
     
 
 
 })
+
+function gestionFavoritos(evento){
+    
+    evento.preventDefault();
+    var ruta=$(this).attr("href");  
+    
+      $.ajax({
+        url:ruta,
+        async: true,
+        type: "GET",
+        dataType: "json",       
+        success:llegadaDatosFavoritos,
+        timeout: 4000,
+        error: problemasEnvio
+
+    });
+    
+}
+
+function llegadaDatosFavoritos(datos){
+    if(datos[0]=='TRUE'){
+        alert('Añadido mensaje favorito');
+    }else{
+        alert('error no se añadio mensaje favorito');
+    }
+}
+
 jQuery.fn.alertas= function(){
     var alertas = $(this);
     
