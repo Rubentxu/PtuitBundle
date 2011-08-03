@@ -35,12 +35,18 @@
                         <div class="date">{{ mensaje.creado|date('d-m-Y') }}
                             <span class="ExtMens">{% if usuario in mensaje.usuarioDeFavoritos %}
                                 <a class="favorito" href="{{ path('ptuit_borra_favorito', { 'id': mensaje.id }) }}">
-                                    <img src="{{ asset('bundles/ptuit/imagenes/favorito.jpeg') }}"/> Eliminar favorito</a>            
+                                    <img src="{{ asset('bundles/ptuit/imagenes/favorito2.jpeg') }}"/> Eliminar favorito</a>            
                                     {% else %}
                                 <a class="favorito" href="{{ path('ptuit_favorito', { 'id': mensaje.id }) }}">
                                     <img src="{{ asset('bundles/ptuit/imagenes/favorito.jpeg') }}"/> Favorito</a>
                                     {% endif %}
-                                <a href="#"><img src="{{ asset('bundles/ptuit/imagenes/reptuit.jpeg') }}"></img> Reptuit</a>
+                                    {% if usuario == mensaje.usuario %}
+                                <a class="borrarMens" href="{{ path('ptuit_favorito', { 'id': mensaje.id }) }}">
+                                    <img src="{{ asset('bundles/ptuit/imagenes/papelera.jpeg') }}"></img> Borrar</a>
+                                    {% else %}
+                                 <a class="reptuit" href="{{ path('ptuit_replicar', { 'id': mensaje.id }) }}">
+                                     <img src="{{ asset('bundles/ptuit/imagenes/reptuit.jpeg') }}"></img> Reptuit</a>    
+                                    {% endif %}
                                 <a href="#"><img src="{{ asset('bundles/ptuit/imagenes/responder.jpeg') }}"></img> Responder</a>
                             </span>
                             <div class="flotarDer"> <a class="verMens" href="{{ path('ptuit_show', { 'id': mensaje.id }) }}">ver</a></div> 

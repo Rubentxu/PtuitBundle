@@ -3,6 +3,10 @@
  'texto': mensaje.texto,
 'creado': mensaje.creado|date('d-m-Y'),
 'nick': mensaje.usuario.nick,
-'ruta_ver': path('ptuit_show', { 'id': mensaje.id })
+'ruta_ver': path('ptuit_show', { 'id': mensaje.id }),
+'ruta_favorito': path('ptuit_favorito', { 'id': mensaje.id }),
+'imgfavorito': asset('bundles/ptuit/imagenes/favorito.jpeg'),
+'imgreptuit' : asset('bundles/ptuit/imagenes/reptuit.jpeg'),
+'imgresponder' : asset('bundles/ptuit/imagenes/responder.jpeg')
  }|json_encode| raw }}
 

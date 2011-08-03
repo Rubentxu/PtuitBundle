@@ -1,0 +1,4 @@
+{{ { 'imagen':  asset(imagen) ,
+ 'texto': texto,
+'ruta':  path(ruta, { 'id': mensaje.id }) 
+ }|json_encode| raw }}

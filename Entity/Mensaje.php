@@ -22,7 +22,6 @@ class Mensaje {
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-  
     /**
      * @var datetime $fecha     
      * @ORM\Column(name="creado", type="datetime", nullable=true)
@@ -45,7 +44,7 @@ class Mensaje {
      * @Assert\MaxLength(limit=160, message = "Por favor,no exceda de los 160 caracteres")
      */
     private $texto;
-    /**     
+    /**
      * @ORM\ManyToMany(targetEntity="Usuario", inversedBy="mensajesReplicados")
      * @ORM\JoinTable(name="Mensajes_replicados_por_Usuarios",
      *      joinColumns={@ORM\JoinColumn(name="usuario_que_replica", referencedColumnName="id")},
@@ -88,30 +87,24 @@ class Mensaje {
         $this->usuario = new ArrayCollection();
         $this->tagid = new ArrayCollection();
         $this->replicadoPorUsuario = new ArrayCollection();
-        $this->usuarioDeFavoritos= new ArrayCollection();
+        $this->usuarioDeFavoritos = new ArrayCollection();
     }
-
-    
-
-
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
-    }  
+    }
 
     /**
      * Set creado
      *
      * @param datetime $creado
      */
-    public function setCreado($creado)
-    {
+    public function setCreado($creado) {
         $this->creado = $creado;
     }
 
@@ -120,8 +113,7 @@ class Mensaje {
      *
      * @return datetime 
      */
-    public function getCreado()
-    {
+    public function getCreado() {
         return $this->creado;
     }
 
@@ -130,8 +122,7 @@ class Mensaje {
      *
      * @param datetime $modificado
      */
-    public function setModificado($modificado)
-    {
+    public function setModificado($modificado) {
         $this->modificado = $modificado;
     }
 
@@ -140,8 +131,7 @@ class Mensaje {
      *
      * @return datetime 
      */
-    public function getModificado()
-    {
+    public function getModificado() {
         return $this->modificado;
     }
 
@@ -150,8 +140,7 @@ class Mensaje {
      *
      * @param string $texto
      */
-    public function setTexto($texto)
-    {
+    public function setTexto($texto) {
         $this->texto = $texto;
     }
 
@@ -160,8 +149,7 @@ class Mensaje {
      *
      * @return string 
      */
-    public function getTexto()
-    {
+    public function getTexto() {
         return $this->texto;
     }
 
@@ -170,9 +158,13 @@ class Mensaje {
      *
      * @param amiguetes\PtuitBundle\Entity\Usuario $replicadoPorUsuario
      */
-    public function addReplicadoPorUsuario(\amiguetes\PtuitBundle\Entity\Usuario $replicadoPorUsuario)
-    {
+    public function addReplicadoPorUsuario(\amiguetes\PtuitBundle\Entity\Usuario $replicadoPorUsuario) {
         $this->replicadoPorUsuario[] = $replicadoPorUsuario;
+    }
+
+    public function deleteReplicadoPorUsuario(\amiguetes\PtuitBundle\Entity\Usuario $usuario) {
+
+        $this->replicadoPorUsuario->removeElement($usuario);
     }
 
     /**
@@ -180,8 +172,7 @@ class Mensaje {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getReplicadoPorUsuario()
-    {
+    public function getReplicadoPorUsuario() {
         return $this->replicadoPorUsuario;
     }
 
@@ -190,9 +181,13 @@ class Mensaje {
      *
      * @param amiguetes\PtuitBundle\Entity\Usuario $usuarioid
      */
-    public function addUsuarioDeFavoritos(\amiguetes\PtuitBundle\Entity\Usuario $usuario)
-    {
+    public function addUsuarioDeFavoritos(\amiguetes\PtuitBundle\Entity\Usuario $usuario) {
         $this->usuarioDeFavoritos[] = $usuario;
+    }
+
+    public function deleteUsuarioDeFavoritos(\amiguetes\PtuitBundle\Entity\Usuario $usuario) {
+
+        $this->usuarioDeFavoritos->removeElement($usuario);
     }
 
     /**
@@ -200,8 +195,7 @@ class Mensaje {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getUsuarioDeFavoritos()
-    {
+    public function getUsuarioDeFavoritos() {
         return $this->usuarioDeFavoritos;
     }
 
@@ -210,8 +204,7 @@ class Mensaje {
      *
      * @param amiguetes\PtuitBundle\Entity\Tag $tagid
      */
-    public function addTagid(\amiguetes\PtuitBundle\Entity\Tag $tagid)
-    {
+    public function addTagid(\amiguetes\PtuitBundle\Entity\Tag $tagid) {
         $this->tagid[] = $tagid;
     }
 
@@ -220,8 +213,7 @@ class Mensaje {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getTagid()
-    {
+    public function getTagid() {
         return $this->tagid;
     }
 
@@ -230,8 +222,7 @@ class Mensaje {
      *
      * @param amiguetes\PtuitBundle\Entity\Usuario $usuario
      */
-    public function setUsuario(\amiguetes\PtuitBundle\Entity\Usuario $usuario)
-    {
+    public function setUsuario(\amiguetes\PtuitBundle\Entity\Usuario $usuario) {
         $this->usuario = $usuario;
     }
 
@@ -240,8 +231,8 @@ class Mensaje {
      *
      * @return amiguetes\PtuitBundle\Entity\Usuario 
      */
-    public function getUsuario()
-    {
+    public function getUsuario() {
         return $this->usuario;
     }
+
 }

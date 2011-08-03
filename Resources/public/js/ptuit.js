@@ -4,7 +4,8 @@ $(document).ready(function(){
     $("#btnRegistrar").click(registrar);
     $('.verMens').live('click', verMens);   
     $('#alert').alertas();
-    $('.favorito').click(gestionFavoritos);
+    $('.favorito').live('click',gestionFavoritos);
+    $('.reptuit').live('click',gestionReptuit);
     
 
 
@@ -15,12 +16,17 @@ function gestionFavoritos(evento){
     evento.preventDefault();
     var ruta=$(this).attr("href");  
     
-      $.ajax({
+    $.ajax({
         url:ruta,
+        context: $(this),
         async: true,
         type: "GET",
         dataType: "json",       
-        success:llegadaDatosFavoritos,
+        success:function(datos){
+            $(this).attr('href', datos.ruta);
+            var html='<img src="'+datos.imagen+'"/> '+datos.texto;        
+            $(this).html(html);    
+        },
         timeout: 4000,
         error: problemasEnvio
 
@@ -28,13 +34,29 @@ function gestionFavoritos(evento){
     
 }
 
-function llegadaDatosFavoritos(datos){
-    if(datos[0]=='TRUE'){
-        alert('Añadido mensaje favorito');
-    }else{
-        alert('error no se añadio mensaje favorito');
-    }
+function gestionReptuit(evento){
+    
+    evento.preventDefault();
+    var ruta=$(this).attr("href");  
+    
+    $.ajax({
+        url:ruta,
+        context: $(this),
+        async: true,
+        type: "GET",
+        dataType: "json",       
+        success:function(datos){
+            $(this).attr('href', datos.ruta);
+            var html='<img src="'+datos.imagen+'"/> '+datos.texto;        
+            $(this).html(html);    
+        },
+        timeout: 4000,
+        error: problemasEnvio
+
+    });
+    
 }
+
 
 jQuery.fn.alertas= function(){
     var alertas = $(this);
@@ -46,7 +68,7 @@ jQuery.fn.alertas= function(){
         }, 3000);
         alertas.animate({
             height: alertas.css('line-height') || '50px'
-            }, 200)
+        }, 200)
         .click(function () {
             window.clearTimeout(alerttimer);
             alertas.animate({
@@ -86,8 +108,9 @@ function inicioVerMens (datos){
 function llegadaDatosVerMens(datos){
     $(".bloqueContenido-body").removeClass("txtMenCargando");
     $('.bloqueContenido-body').fadeOut(500,function(){    
-    $('.bloqueContenido-body').html(datos); 
-    $('.bloqueContenido-body').fadeIn(1000);});
+        $('.bloqueContenido-body').html(datos); 
+        $('.bloqueContenido-body').fadeIn(1000);
+    });
     
     
     
@@ -137,7 +160,7 @@ function llegadaDatosRegistro(datos){
         $('#panel').hide();
         $('#panel2').hide();
         $("#panel").removeClass("txtMenCargando");
-        $("#pass").val("")
+        $("#pass").val("");
         $("#nick").val("");
         $("#pass2").val("");
         $("#correo").val("");
@@ -198,11 +221,15 @@ function inicioEnvio (datos){
 function llegadaDatos (datos){   
     
     if(datos.texto){  
-        var ptuit='<li><a href="#"><img class="avatar" src="'+datos.avatar+'"alt="avatar"/></a>'+
-                '<div class="tweetTxt"><strong><a href="#">'+datos.nick+'</a>: </strong>'+
-                datos.texto+'<div class="date">'+datos.creado+'</div>'+
-                '<div class="flotarDer"><a class="verMens" href="'+datos.ruta_ver+'">ver</a></div>'+
-                '</div><div class="clear"></div></li>';
+        var ptuit='<li> <div class="avatar"><a href="#"><img src="'+datos.avatar+'"alt="avatar"/></a></div>'+
+        '<div class="tweetTxt"><strong><a href="#">@'+datos.nick+'</a>: </strong><p>'+
+        datos.texto+'</p><div class="date">'+datos.creado+'<span class="ExtMens">'+
+        '<a class="favorito" href="'+datos.ruta_favorito+'"><img src="'+datos.imgfavorito+
+        '"/> Favorito</a>'+        
+        '<a href="#"><img src="'+datos.imgreptuit+'" /> Reptuit</a>'+
+        '<a href="#"><img src="'+datos.imgresponder+'" /> Responder</a></span>'+
+        '<div class="flotarDer"><a class="verMens" href="'+datos.ruta_ver+'">ver</a></div>'+
+        '</div></div><div class="clear"></div></li>';
             
         $('ul.statuses li:first-child').before(ptuit);
         $("ul.statuses:empty").append(ptuit);

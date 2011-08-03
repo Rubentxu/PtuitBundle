@@ -91,9 +91,6 @@ class MensajeController extends Controller {
         $validador = $this->get('validator');
         $listaErrores = $validador->validate($mensaje);
 
-
-
-
 // TODO Implementar recogida de tags en el texto palabras que empiecen por #
         //$mensaje->addTagid($tagid);
 
@@ -101,7 +98,7 @@ class MensajeController extends Controller {
 
             if (count($listaErrores) > 0) {
                 $res = array();
-                foreach ($listaErrores as  $value) {
+                foreach ($listaErrores as $value) {
                     $res[] = $value->getMessage();
                 }
                 $response = new Response(json_encode($res));
@@ -111,8 +108,8 @@ class MensajeController extends Controller {
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($mensaje);
                 $em->flush();
-                
-                return array('mensaje'=>$mensaje);
+
+                return array('mensaje' => $mensaje);
             }
         }
     }
@@ -181,14 +178,13 @@ class MensajeController extends Controller {
             'delete_form' => $deleteForm->createView(),
         );
     }
-    
-    
-    
-     /**
+
+    /**
      * Edits an existing Mensaje entity.
      *
      * @Route("/{id}/favorito", name="ptuit_favorito")
      * @Method("get") 
+     * @Template("PtuitBundle:Ajax:favorito.json.twig")
      */
     public function addFavoritoAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
@@ -199,34 +195,143 @@ class MensajeController extends Controller {
             throw $this->createNotFoundException('Incapaz de encontrar la entidad Mensaje.');
         }
         $usuario = $this->get('security.context')->getToken()->getUser();
-        $mensaje->addUsuarioDeFavoritos($usuario);       
-        
-        
+        $mensaje->addUsuarioDeFavoritos($usuario);
+
+
         $request = $this->getRequest();
 
-        if ('GET' === $request->getMethod()) { 
-            
-                $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($mensaje);                
-                $em->flush();
+        if ('GET' === $request->getMethod()) {
 
-                $response = new Response(json_encode(array('TRUE')));
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
-            
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($mensaje);
+            $em->flush();
+
+            $response = new Response();
+            $response->headers->set('Content-Type', 'application/json');
+            return array('texto'=>'Eliminar favorito',
+                'mensaje'=>$mensaje, 'ruta'=>'ptuit_borra_favorito',
+                'imagen'=>'bundles/ptuit/imagenes/favorito2.jpeg');
         }
 
-        $response = new Response(json_encode(array('FALSE')));
-                $response->headers->set('Content-Type', 'application/json');
-                return $response;
+        $response = new Response(json_encode(array('ERROR')));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
-     /**
+
+    /**
      * Edits an existing Mensaje entity.
      *
      * @Route("/{id}/delete/favorito", name="ptuit_borra_favorito")
      * @Method("get") 
+     * @Template("PtuitBundle:Ajax:favorito.json.twig")
      */
-    public function deleteFavoritoAction($id) {}
+    public function deleteFavoritoAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $mensaje = $em->getRepository('PtuitBundle:Mensaje')->find($id);
+
+        if (!$mensaje) {
+            throw $this->createNotFoundException('Incapaz de encontrar la entidad Mensaje.');
+        }
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $mensaje->deleteUsuarioDeFavoritos($usuario);
+
+
+        $request = $this->getRequest();
+
+        if ('GET' === $request->getMethod()) {
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($mensaje);
+            $em->flush();
+
+            $response = new Response();
+            $response->headers->set('Content-Type', 'application/json');
+            return array('texto'=>' Favorito',
+                'mensaje'=>$mensaje, 'ruta'=>'ptuit_favorito','imagen'=>
+                'bundles/ptuit/imagenes/favorito.jpeg');
+        }
+
+        $response = new Response(json_encode(array('ERROR')));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+     /**
+     * Edits an existing Mensaje entity.
+     *
+     * @Route("/{id}/replicar", name="ptuit_replicar")
+     * @Method("get") 
+     * @Template("PtuitBundle:Ajax:replicado.json.twig")
+     */
+    public function addUsuarioReplicanteAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $mensaje = $em->getRepository('PtuitBundle:Mensaje')->find($id);
+
+        if (!$mensaje) {
+            throw $this->createNotFoundException('Incapaz de encontrar la entidad Mensaje.');
+        }
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $mensaje->addReplicadoPorUsuario($usuario);
+
+
+        $request = $this->getRequest();
+
+        if ('GET' === $request->getMethod()) {
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($mensaje);
+            $em->flush();
+
+            $response = new Response();
+            $response->headers->set('Content-Type', 'application/json');
+            return array('texto'=>'Deshacer Reptuit',
+                'mensaje'=>$mensaje, 'ruta'=>'ptuit_borra_reptuit',
+                'imagen'=>'bundles/ptuit/imagenes/reptuit.jpeg');
+        }
+
+        $response = new Response(json_encode(array('ERROR')));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+    /**
+     * Edits an existing Mensaje entity.
+     *
+     * @Route("/{id}/delete/replicar", name="ptuit_borra_reptuit")
+     * @Method("get") 
+     * @Template("PtuitBundle:Ajax:favorito.json.twig")
+     */
+    public function deleteUsuarioReplicanteAction($id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $mensaje = $em->getRepository('PtuitBundle:Mensaje')->find($id);
+
+        if (!$mensaje) {
+            throw $this->createNotFoundException('Incapaz de encontrar la entidad Mensaje.');
+        }
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $mensaje->deleteReplicadoPorUsuario($usuario);
+
+
+        $request = $this->getRequest();
+
+        if ('GET' === $request->getMethod()) {
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($mensaje);
+            $em->flush();
+
+            $response = new Response();
+            $response->headers->set('Content-Type', 'application/json');
+            return array('texto'=>' Reptuit',
+                'mensaje'=>$mensaje, 'ruta'=>'ptuit_replicar','imagen'=>
+                'bundles/ptuit/imagenes/reptuit.jpeg');
+        }
+
+        $response = new Response(json_encode(array('ERROR')));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
 
     /**
      * Deletes a Mensaje entity.
